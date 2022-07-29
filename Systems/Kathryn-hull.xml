@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+Not currently use but will eventually have
+keel, rudder, daggerboard attributes and functions
+-->
+<system name="Hull">
+
+  <function name="aero/hull-beta-rad">
+   <description>Beta angle for the hull. The builtin beta property seems to misbehave.</description>
+   <difference>
+    <!-- Course of hull. -->
+    <property>attitude/heading-true-rad</property>
+    <!-- Course relative the air. -->
+    <atan2>
+     <difference>
+      <property>velocities/v-east-fps</property>
+      <property>atmosphere/total-wind-east-fps</property>
+     </difference>
+     <difference>
+      <property>velocities/v-north-fps</property>
+      <property>atmosphere/total-wind-north-fps</property>
+     </difference>
+    </atan2>
+   </difference>
+  </function>
+
+  <function name="aero/tmp/hull-beta-deg">
+   <product>
+    <value>57.29578</value>
+    <property>aero/hull-beta-rad</property>
+   </product>
+  </function>
+
+  <function name="aero/hull-beta-deg">
+   <sum>
+    <property>aero/tmp/hull-beta-deg</property>
+    <product>
+     <lt>
+      <property>aero/tmp/hull-beta-deg</property>
+      <value>-180.0</value>
+     </lt>
+     <value>360.0</value>
+    </product>
+    <product>
+     <gt>
+      <property>aero/tmp/hull-beta-deg</property>
+      <value>180.0</value>
+     </gt>
+     <value>-360.0</value>
+    </product>
+   </sum>
+  </function>
+
+</system>

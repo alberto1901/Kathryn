@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <fx>
+
+   <creaking_hull>
+     <name>creaking_hull</name>
+     <mode>looped</mode>
+     <path>Aircraft/Kathryn/Sounds/wood-creaking-sound.wav</path>
+     <condition>
+      <less-than>
+       <property>/fdm/jsbsim/hydro/v-kt</property>
+       <value>2</value>
+      </less-than>
+    </condition>
+     <position>
+       <x> 3.683750</x>
+       <y> 0.056888</y>
+       <z> 2.448687</z>
+     </position>
+   </creaking_hull>
+
+  <waves>
+   <name>waves-sound</name>
+   <mode>looped</mode>
+   <path>Aircraft/Kathryn/Sounds/waves.wav</path>
+   <condition>
+    <greater-than>
+     <property>/fdm/jsbsim/hydro/v-kt</property>
+     <value>0</value>
+    </greater-than>
+   </condition>
+   <position>
+    <x>0.01</x>
+    <y>0.01</y>
+    <z>0.01</z>
+   </position>
+   <!-- reference-dist>5.0</reference-dist>
+   <max-dist>75.0</max-dist -->
+   <volume>
+    <factor>1.0</factor>
+    <offset>1.0</offset>
+    <min>1.0</min>
+    <max>2.0</max>
+   </volume>
+  </waves>
+
+  <flowing-water>
+   <name>flowing-water</name>
+   <mode>looped</mode>
+   <path>Aircraft/Kathryn/Sounds/water-stream-sound.wav</path>
+   <condition>
+    <greater-than>
+     <property>/fdm/jsbsim/hydro/v-kt</property>
+     <value>2</value>
+    </greater-than>
+   </condition>
+   <position>
+    <x>6.0</x>
+    <y>0.0</y>
+    <z>0.5</z>
+   </position>
+   <volume>
+    <property>/fdm/jsbsim/hydro/v-kt</property>
+    <factor>0.2</factor>
+    <offset>0.3</offset>
+    <min>0.3</min>
+    <max>3.0</max>
+   </volume>
+ </flowing-water>
+
+  <luffing>
+    <name>luffing</name>
+    <path>Aircraft/Kathryn/Sounds/luffing.wav</path>
+    <mode>looped</mode>
+    <condition>
+      <property>surface-positions/sails/sail[1]/sail-reef-norm</property>
+      <less-than>
+        <property>surface-positions/sails/sail[1]/sail-fill</property>
+        <value>0.25</value>
+      </less-than>
+    </condition>
+   <position>
+     <x> 3.683750</x>
+     <y> 0.056888</y>
+     <z> 2.448687</z>
+   </position>
+   <volume>
+    <property>surface-positions/sails/sail[1]/sail-fill</property>
+    <factor>1.0</factor>
+    <offset>1.0</offset>
+    <min>1.0</min>
+    <max>5.0</max>
+   </volume>
+  </luffing>
+
+ <raise-sail>
+   <name>raise-sail-sound</name>
+   <path>Aircraft/Kathryn/Sounds/raise-sail-sound.wav</path>
+   <condition>
+     <greater-than>
+      <property>surface-positions/sails/sail[1]/sail-reef-norm</property>
+     <value>0.0</value>
+   </greater-than>
+   </condition>
+   <position>
+     <x> 3.683750</x>
+     <y> 0.056888</y>
+     <z> 2.448687</z>
+   </position>
+   <volume>
+    <property>surface-positions/sails/sail[1]/sail-reef-norm</property>
+    <factor>1.0</factor>
+    <offset>1.0</offset>
+    <min>2.0</min>
+    <max>5.0</max>
+   </volume>
+  </raise-sail>
+
+ <drop-sail>
+   <name>drop-sail-sound</name>
+   <path>Aircraft/Kathryn/Sounds/luffing.wav</path>
+   <condition>
+     <property>surface-positions/sails/sail[1]/sail-reef-norm</property>
+   </condition>
+   <position>
+     <x> 3.683750</x>
+     <y> 0.056888</y>
+     <z> 2.448687</z>
+   </position>
+   <volume>
+    <property>surface-positions/sails/sail[1]/sail-reef-norm</property>
+    <factor>1.0</factor>
+    <offset>1.0</offset>
+    <min>2.0</min>
+    <max>5.0</max>
+   </volume>
+  </drop-sail>
+
+
+  <run-aground>
+   <name>run-aground-sound</name>
+   <path>Aircraft/Kathryn/Sounds/crash-settle-sound.wav</path>
+   <condition>
+     <property>/position/aground</property>
+   </condition>
+   <position>
+    <x>0.01</x>
+    <y>0.01</y>
+    <z>0.01</z>
+   </position>
+   <volume>
+    <property>/position/aground</property>
+    <factor>1.0</factor>
+    <offset>1.0</offset>
+    <min>1.0</min>
+    <max>5.0</max>
+   </volume>
+  </run-aground>
+
+  <refloat>
+   <name>refloat-sound</name>
+   <path>Aircraft/Kathryn/Sounds/water-splash-sound.wav</path>
+   <condition>
+    <not>
+     <property>/position/aground</property>
+    </not>
+   </condition>
+   <position>
+    <x>0.01</x>
+    <y>0.01</y>
+    <z>0.01</z>
+   </position>
+   <volume>
+    <property>/position/aground</property>
+    <factor>1.0</factor>
+    <offset>1.0</offset>
+    <min>1.0</min>
+    <max>2.0</max>
+   </volume>
+  </refloat>
+
+
+ <drop-anchor>
+   <name>drop-anchor-sound</name>
+   <path>Aircraft/Kathryn/Sounds/water-splash-sound.wav</path>
+   <condition>
+     <property>/position/anchored</property>
+   </condition>
+   <position>
+    <x>0.01</x>
+    <y>0.01</y>
+    <z>0.01</z>
+   </position>
+   <volume>
+    <property>/position/anchored</property>
+    <factor>1.0</factor>
+    <offset>1.0</offset>
+    <min>1</min>
+    <max>2.0</max>
+   </volume>
+  </drop-anchor>
+
+ <raise-anchor>
+   <name>raise-anchor-sound</name>
+   <path>Aircraft/Kathryn/Sounds/raise-anchor-sound.wav</path>
+   <condition>
+    <not>
+     <property>/position/anchored</property>
+    </not>
+   </condition>
+   <position>
+    <x>0.01</x>
+    <y>0.01</y>
+    <z>0.01</z>
+   </position>
+   <volume>
+    <property>/position/anchored</property>
+    <factor>1.0</factor>
+    <offset>1.0</offset>
+    <min>2.0</min>
+    <max>5.0</max>
+   </volume>
+  </raise-anchor>
+
+  <seagull>
+    <name>seagull-sound</name>
+    <path>Aircraft/Kathryn/Sounds/seagull.wav</path>
+   <condition>
+    <or>
+    <greater-than>
+     <property>/sim/model/torso_yaw</property>
+      <value>10</value>
+    </greater-than>
+    <less-than>
+     <property>/sim/model/torso_yaw</property>
+      <value>-20</value>
+    </less-than>
+    </or>
+   </condition>
+   <position>
+    <x>0.01</x>
+    <y>0.01</y>
+    <z>0.01</z>
+   </position>
+  </seagull>
+
+
+ </fx>
+
+</PropertyList>
