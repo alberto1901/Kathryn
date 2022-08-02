@@ -73,11 +73,12 @@
      <property>/surface-positions/sails/sail[1]/sail-reef-norm</property>
 
      <!-- property>aero/sail-draft-depth-norm</property --> <!-- Add luffing and remove lift when backed. -->
-     <property>/surface-positions/sails/sail[1]/sail-reef-norm</property>
+     <!-- property>/surface-positions/sails/sail[1]/sail-reef-norm</property -->
 
      <value>-1.0</value> <!-- Flip sign?! -->
      <!-- The CY sign is separated. -->
-     <table> <!-- not sure what this table is for -->
+      <!-- not sure what this table is for -->
+     <!--table>
       <independentVar lookup="row">/surface-positions/sails/sail[1]/sail-beta-deg</independentVar>
       <tableData>
         -1 -1.0
@@ -91,8 +92,9 @@
        359 -1.0
        361  1.0
       </tableData>
-    </table>
-     <table> <!-- Wild guess with JavaFoil. -->
+    </table -->
+ <!-- Wild guess with JavaFoil. -->
+     <!--table>
       <independentVar lookup="row">/surface-positions/sails/sail[1]/sail-beta-deg</independentVar>
       <tableData>
 0	0.805
@@ -457,7 +459,7 @@
 359	0.107
 360	0.805
       </tableData>
-     </table>
+    </table -->
     </product>
    </function>
 </axis> <!-- END OF SIDE AXIS -->

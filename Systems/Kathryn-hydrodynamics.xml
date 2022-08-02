@@ -28,9 +28,15 @@
 
  <!-- HRP location -->
  <!-- Kathryn -->
- <property value="283.74">metrics/hydro-rp-x-in</property>
+ <!-- center of volume of submerged hull as determined in Blender converted to inches-->
+ <property value="301.5984">metrics/hydro-rp-x-in</property>
  <property value="0.0">metrics/hydro-rp-y-in</property>
- <property value="81.08">metrics/hydro-rp-z-in</property>
+ <!-- property value="-17.64961">metrics/hydro-rp-z-in</property --> <!--this value places model above water -->
+ <!-- guessed at values -->
+ <!-- property value="283.74">metrics/hydro-rp-x-in</property -->
+ <!-- property value="0.0">metrics/hydro-rp-y-in</property -->
+ <property value="81.08">metrics/hydro-rp-z-in</property> <!--place model at waterline -->
+
 
  <!-- Kathryn -->
  <property value="47.29">metrics/hydro-length-ft</property>
@@ -57,7 +63,7 @@
  <property value="1.0">hydro/roll-tweak-factor</property>
  <property value="1.0">hydro/pitch-tweak-factor</property>
  <property value="1.0">hydro/yaw-tweak-factor</property>
- <property value="1.0">hydro/yaw-stability-tweak-factor</property>
+ <property value="2.0">hydro/yaw-stability-tweak-factor</property>
 
  <!-- The bx and by channels of the body frame are not used. -->
  <property value="0.0">hydro/fbx-lbs</property>
@@ -577,12 +583,11 @@
    <function>
     <description>Yaw moment due to hull (per radian beta)</description>
     <product>
-     <value>1.0</value>
      <property>hydro/yaw-stability-tweak-factor</property>
      <property>hydro/qbar-u-psf</property>
      <property>hydro/hull-beam-ft3</property>
      <sin><property>hydro/beta-rad</property></sin>
-     <value>0.125</value> <!-- FIXME? Does beta have the right sign? -->
+     <value>0.9125</value> <!-- FIXME? Does beta have the right sign? -->
     </product>
    </function>
   </fcs_function>
