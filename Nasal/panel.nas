@@ -43,6 +43,22 @@ var title = "Instruments";
       .setAlignment("center-center") # how the text is aligned to where you place it
       .setTranslation(128, 100);     # where to place the text
 
+   #create an image for the course indicator
+    var true_course_indicator = root.createChild("image")
+        .setFile( "Aircraft/Kathryn/Instruments/course_indicator.png" )
+        .setScale(0.60)
+        .setCenter(128,128)
+        .setTranslation(50,50);
+
+    var true_course_data = root.createChild("text")
+        .setText("True Course\n")
+        .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+        .setFontSize(12, 0.9)          # font size (in texels) and font aspect ratio
+        .setColor(0,0,1,1)             # green, fully opaque
+        .setAlignment("center-center") # how the text is aligned to where you place it
+        .setTranslation(32, 235);     # where to place the text
+
+
    #create an image for the vessel (used in sail indicator)
     var vessel = root.createChild("image")
         .setFile( "Aircraft/Kathryn/Instruments/vessel.png" )
@@ -81,7 +97,7 @@ var title = "Instruments";
 
 
 
-   #create an image for the wind indicator)
+   #create an image for the wind indicator
     var wind_indicator = root.createChild("image")
         .setFile( "Aircraft/Kathryn/Instruments/wind_indicator.png" )
         .setScale(0.75)
@@ -97,7 +113,7 @@ var title = "Instruments";
         .setTranslation(32, 425);     # where to place the text
 
 
-   #create an image for the wave indicator)
+   #create an image for the wave indicator
     var wave_indicator = root.createChild("image")
         .setFile( "Aircraft/Kathryn/Instruments/wave_indicator.png" )
         .setScale(0.75)
@@ -112,6 +128,12 @@ var title = "Instruments";
         .setAlignment("center-center") # how the text is aligned to where you place it
         .setTranslation(204, 425);     # where to place the text
 
+   #create an image for the course indicator
+#    var course_indicator = root.createChild("image")
+#        .setFile( "Aircraft/Kathryn/Instruments/course_indicator.png" )
+#        .setScale(0.65)
+#        .setCenter(128,128)
+#        .setTranslation(29,240);
 
 
     #active sail label
@@ -315,6 +337,14 @@ var update = func(){
     wave_indicator.setRotation((-wave - hdg)*D2R);
     #update wave data
     wave_data.setText(sprintf("Wave\n%.0f : ", wave));
+
+    #update course_data indicator/data
+    var true_course = getprop("/fdm/jsbsim/attitude/psi-deg");
+    true_course_indicator.setRotation(true_course * D2R);
+#    true_course_indicator.setRotation(-hdg*D2R); #adjust for compass rotation
+    #update course data
+    true_course_data.setText(sprintf("True Course\n%.0f", true_course));
+
 
 
     #update jib reefing indicator

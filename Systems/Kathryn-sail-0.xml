@@ -8,6 +8,34 @@
   *  sail-beta-deg     difference between sail degree and wind degree
 -->
 
+  <function name="aero/moment/Y_sail-0-lbsft">
+    <description>Yaw moment due to sail 0. Since sail is in front of COG, moment should always face the boat away from the wind.</description>
+    <product>
+     <property>aero/qbar-psf</property> <!--wind pressure -->
+     <property>/surface-positions/sails/sail[0]/sail-sqft</property> <!-- square footage of sail -->
+     <property>/surface-positions/sails/sail[0]/sail-reef-norm</property> <!-- percentage of square footage exposed to wind -->
+     <value>6.40</value><!--property>distance from COG</property -->
+     <table> <!-- angle of sail to wind -->
+      <independentVar lookup="row">/surface-positions/sails/sail[0]/sail-beta-deg</independentVar>
+      <tableData>
+        0    0.00
+       32    0.00
+       39   -8.0
+       45   -12
+       90   -30
+       135  -12
+       180   0.00
+       225   12
+       270   30
+       315   12
+       321   8.0
+       328   0.00
+       360   0.00
+     </tableData>
+    </table>
+    </product>
+  </function>
+
    <function name="aero/force/D_sail-0-lbs">
     <description>Drag force due to sail 0</description>
     <product>

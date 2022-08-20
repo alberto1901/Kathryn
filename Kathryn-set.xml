@@ -450,15 +450,33 @@ setlistener("/sim/signals/fdm-initialized", func {
     <anchored type="bool">false</anchored>
   </position>
 
-<!-- SAIL PROPERTIES -->
+<!-- SURFACES -->
  <surface-positions>
+   <hull>
+     <hull-wetted-surface-sqft>819.6093</hull-wetted-surface-sqft> <!-- FreeCAD FCInfo "surface of the form" where 1 unit = 1 mm, assumed as meters, converted to feet-->
+     <rudder-sqft>28.028211</rudder-sqft><!--both sides-->         <!-- Wings3d area -->
+     <rudder-cof-x>14.798766</rudder-cof-x>                        <!-- Wings3d xyz -->
+     <rudder-cof-y>-0.050265</rudder-cof-y>                        <!-- Wings3d xyz -->
+     <rudder-cof-z>-0.701324</rudder-cof-z>                        <!-- Wings3d xyz -->
+     <!-- keels provide heeling counter-balance, lateral resistance/drag and forward thrust/lift -->
+     <full-keel-sqft type="double">75.622</full-keel-sqft> <!--both sides --> <!-- Wings3d area -->
+     <center-board-sqft type="double">59.64</center-board-sqft> <!--both sides --> <!-- Wings3d area -->
+     <center-board-drop-norm type="double">1.0</center-board-drop-norm> <!-- 0.0 - 1.0 percentage of centboard dropped -->
+     <center-board-cof-x type="double">5.511927</center-board-cof-x>    <!-- Wings3d xyz -->
+     <center-board-cof-y type="double">0.0</center-board-cof-y>         <!-- Wings3d xyz -->
+     <center-board-cof-z type="double">-1.314504</center-board-cof-z>   <!-- Wings3d xyz -->
+   </hull>
+
    <sails>
+     <!-- sails provide thrust/lift and heeling moment -->
      <number-of-sails>2</number-of-sails>
 
      <sail>       <!-- JIB SAIL = surface-positions/sails/sail[0]/ -->
        <sail-name>jib</sail-name>
-       <sail-sqft>429.82</sail-sqft>                                  <!-- total area of sail -->
-       <sail-center-of-force></sail-center-of-force>                  <!-- not yet implemented -->
+       <sail-sqft>429.82</sail-sqft>                                  <!-- total area of sail added up in wings -->
+       <sail-cof-x>1.5478</sail-cof-x>                                <!-- Blender center of mass -->
+       <sail-cof-y>0.00</sail-cof-y>                                  <!-- FreeCAD FCInfo -->
+       <sail-cof-z>7.3979</sail-cof-z>                                 <!-- Blender center of mass -->
        <sail-type>stay</sail-type>                                    <!-- square sail or stay sail -->
        <sail-selected type="bool">1</sail-selected>                   <!-- sail selection flag -->
        <sail-beta-deg>0</sail-beta-deg>                               <!-- used in calculating sail drag and side forces -->
@@ -474,8 +492,10 @@ setlistener("/sim/signals/fdm-initialized", func {
 
      <sail>       <!-- MAIN SAIL = surface-positions/sails/sail[1]/ -->
        <sail-name>main</sail-name>
-       <sail-sqft>1054.66</sail-sqft>                                 <!-- total area of sail -->
-       <sail-center-of-force></sail-center-of-force>                  <!-- not yet implemented -->
+       <sail-sqft>1054.66</sail-sqft>                                 <!-- total area of sail added up in Wings -->
+       <sail-cof-x>9.0638</sail-cof-x>                                <!-- Blender center of mass -->
+       <sail-cof-y>0.00</sail-cof-y>                                   <!-- not yet implemented -->
+       <sail-cof-z>7.2009</sail-cof-z>                                <!-- Blender center of mass -->
        <sail-type>stay</sail-type>                                    <!-- square sail or stay sail -->
        <sail-selected type="bool">1</sail-selected>                   <!-- sail selection flag -->
        <sail-beta-deg>0</sail-beta-deg>                               <!-- used in calculating sail drag and side forces -->

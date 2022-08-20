@@ -67,13 +67,12 @@
   <wingspan unit="M">    0.0 </wingspan>
   <chord unit="M">       0.0 </chord>
   <htailarea unit="M2">  0.0 </htailarea>
-  <htailarm unit="M">    0.0 </htailarm -->
-  <!-- keel? -->
-  <vtailarea unit="M2">  10.0 </vtailarea>
-  <vtailarm unit="M">    7.0 </vtailarm>
+  <htailarm unit="M">    0.0 </htailarm>
+  <vtailarea unit="M2">  0.0 </vtailarea>
+  <vtailarm unit="M">    0.0 </vtailarm -->
 
   <location name="AERORP" unit="M">
- <!-- Center of surface of sails as determined in Blender (old=6.64/0/0)-->
+ <!-- Center of surface of all sails as determined in Blender (old=6.64/0/0)-->
     <x>  5.25 </x>
     <y>  0.00 </y>
     <z>  7.29 </z>
@@ -183,7 +182,7 @@
 
   <contact type="STRUCTURE" name="STERN">
    <location unit="M">
-    <x>  15.20 </x>
+    <x>  21.20 </x>
     <y>   0.00 </y>
     <z>   4.00 </z>
    </location>
@@ -212,7 +211,7 @@
  <external_reactions>
    <force name="hydro-X" frame="LOCAL" unit="LBS">
    <location unit="M">
-     <x>  7.66 </x>
+     <x>  7.94 </x>
      <y>  0.00 </y>
      <z>  1.00 </z>
     <!-- x> 7.32 </x>
@@ -228,7 +227,7 @@
 
   <force name="hydro-Y" frame="LOCAL" unit="LBS">
    <location unit="M">
-     <x>  7.66 </x>
+     <x>  7.94 </x>
      <y>  0.00 </y>
      <z>  1.00 </z>
     <!--x> 7.32 </x>
@@ -244,7 +243,7 @@
 
   <force name="hydro-Z" frame="LOCAL" unit="LBS">
    <location unit="M">
-     <x>  7.66 </x>
+     <x>  7.94 </x>
      <y>  0.00 </y>
      <z>  1.00 </z>
     <!--x> 7.32 </x>
@@ -280,6 +279,7 @@
    </direction>
   </moment>
 
+<!-- ANCHORS -->
   <force name="kedge-X" frame="BODY" unit="LBS">
    <location unit="M">
     <x> 0.00 </x>
@@ -368,10 +368,9 @@
  <system file="Kathryn-sail-1"/>  <!-- mainsail -->
 
  <aerodynamics>
-   <axis name="DRAG"> <!-- FIXME! -->
+   <axis name="DRAG">
      <function name="sail-drag">
        <sum>
-         <!-- from sail system files -->
          <property>aero/force/D_sail-1-lbs</property>
          <property>aero/force/D_sail-0-lbs</property>
        </sum>
@@ -380,11 +379,20 @@
 
    <axis name="SIDE">
      <sum>
-       <property>/aero/force/Y_sail-1-lbs</property> <!-- from sail system files -->
+       <property>/aero/force/Y_sail-1-lbs</property>
        <property>/aero/force/Y_sail-0-lbs</property>
-       <!--  -keel resistance ? -->
      </sum>
    </axis> <!-- END OF SIDE AXIS -->
+
+  <axis name="YAW">
+    <function name="sail-yaw">
+      <sum>
+        <property>aero/moment/Y_sail-1-lbsft</property>
+        <property>aero/moment/Y_sail-0-lbsft</property>
+      </sum>
+    </function>
+  </axis>
+
  </aerodynamics>
 
 </fdm_config>

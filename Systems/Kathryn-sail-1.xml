@@ -13,6 +13,34 @@
   * sail-beta-deg     javafoil lookup table (angle of sail 0-360) returns (0.01293 to 1.38006 depending on degree)
 -->
 
+  <function name="aero/moment/Y_sail-1-lbsft">
+    <description>Yaw moment due to sail 1. Since sail is behind the COG, moment should always face the boat into the wind.</description>
+    <product>
+     <property>aero/qbar-psf</property> <!--wind pressure -->
+     <property>/surface-positions/sails/sail[1]/sail-sqft</property> <!-- square footage of sail -->
+     <property>/surface-positions/sails/sail[1]/sail-reef-norm</property> <!-- percentage of square footage exposed to wind -->
+     <value>0.70</value><!--property>distance from COG</property -->
+     <table> <!-- angle of sail to wind -->
+      <independentVar lookup="row">/surface-positions/sails/sail[1]/sail-beta-deg</independentVar>
+      <tableData>
+        0   0.00
+       32   0.00
+       39   8.0
+       45   12
+       90   30
+       135  12
+       180  0.00
+       225 -12
+       270 -30
+       315 -12
+       321 -8.0
+       328  0.00
+       360  0.00
+     </tableData>
+    </table>
+    </product>
+  </function>
+
    <function name="aero/force/D_sail-1-lbs">
     <description>Drag force due to sail 1</description>
     <product>
