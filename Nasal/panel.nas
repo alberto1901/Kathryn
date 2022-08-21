@@ -34,14 +34,12 @@ var title = "Instruments";
     child.setCenter(128,128);
     var compass = child;
 
-    #show speed
-    var groundspeed = root.createChild("text")
-      .setText("")
-      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
-      .setFontSize(30, 0.9)          # font size (in texels) and font aspect ratio
-      .setColor(0,0,0,1)             # black, fully opaque
-      .setAlignment("center-center") # how the text is aligned to where you place it
-      .setTranslation(128, 100);     # where to place the text
+   #create an image for the course indicator compass
+    var true_course_compass = root.createChild("image")
+        .setFile( "Aircraft/Kathryn/Instruments/compass.png" )
+        .setScale(0.60)
+        .setCenter(128,128)
+        .setTranslation(52.5,50);
 
    #create an image for the course indicator
     var true_course_indicator = root.createChild("image")
@@ -53,10 +51,30 @@ var title = "Instruments";
     var true_course_data = root.createChild("text")
         .setText("True Course\n")
         .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
-        .setFontSize(12, 0.9)          # font size (in texels) and font aspect ratio
-        .setColor(0,0,1,1)             # green, fully opaque
+        .setFontSize(20, 0.9)          # font size (in texels) and font aspect ratio
+        .setColor(0.136,0.433,0.11,1)             # green, fully opaque
         .setAlignment("center-center") # how the text is aligned to where you place it
-        .setTranslation(32, 235);     # where to place the text
+        .setTranslation(128, 140);     # where to place the text
+
+    var hdg_ind = root.createChild("text")
+      .setText("|")
+      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+      .setFontSize(30, 0.9)          # font size (in texels) and font aspect ratio
+      .setColor(1,0,0,0.5)           # red, 50% opaque
+      .setAlignment("center-center") # how the text is aligned to where you place it
+      .setTranslation(128, 30);     # where to place the text
+
+
+    #show speed
+    var groundspeed = root.createChild("text")
+      .setText("")
+      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+      .setFontSize(20, 0.9)          # font size (in texels) and font aspect ratio
+      .setColor(0,0,0,1)             # black, fully opaque
+      .setAlignment("center-center") # how the text is aligned to where you place it
+      .setTranslation(128, 110);     # where to place the text
+
+
 
 
    #create an image for the vessel (used in sail indicator)
@@ -110,7 +128,7 @@ var title = "Instruments";
         .setFontSize(12, 0.9)          # font size (in texels) and font aspect ratio
         .setColor(0,0,1,0.5)             # black, fully opaque
         .setAlignment("center-center") # how the text is aligned to where you place it
-        .setTranslation(32, 425);     # where to place the text
+        .setTranslation(42, 425);     # where to place the text
 
 
    #create an image for the wave indicator
@@ -319,7 +337,7 @@ var update = func(){
 #print("SHIP HDG:" ~ hdg);
 
     #update groundspeed
-    groundspeed.setText(sprintf("|\n\n%.2f\nkts", getprop("/velocities/groundspeed-kt")));
+    groundspeed.setText(sprintf("%.1f Kts", getprop("/velocities/groundspeed-kt")));
 
     #update wind indicator/data
     var wind_deg=getprop("/environment/wind-from-heading-deg");
@@ -339,11 +357,12 @@ var update = func(){
     wave_data.setText(sprintf("Wave\n%.0f : ", wave));
 
     #update course_data indicator/data
-    var true_course = getprop("/fdm/jsbsim/attitude/psi-deg");
-    true_course_indicator.setRotation(true_course * D2R);
-#    true_course_indicator.setRotation(-hdg*D2R); #adjust for compass rotation
+    var u_fps = getprop("/fdm/jsbsim/velocities/vrp-v-east-deg_sec");
+    var v_fps = getprop("/fdm/jsbsim/velocities/vrp-v-north-deg_sec");
+    var true_course_deg = math.atan2(u_fps, v_fps) * R2D;
+    true_course_indicator.setRotation(true_course_deg * D2R);
     #update course data
-    true_course_data.setText(sprintf("True Course\n%.0f", true_course));
+    true_course_data.setText(sprintf("%.0f Deg", true_course_deg));
 
 
 
