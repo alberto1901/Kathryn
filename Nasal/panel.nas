@@ -356,12 +356,15 @@ var update = func(){
     #update wave data
     wave_data.setText(sprintf("Wave\n%.0f : ", wave));
 
-    #update course_data indicator/data
-    var u_fps = getprop("/fdm/jsbsim/velocities/vrp-v-east-deg_sec");
-    var v_fps = getprop("/fdm/jsbsim/velocities/vrp-v-north-deg_sec");
-    var true_course_deg = math.atan2(u_fps, v_fps) * R2D;
+    #update true course_data indicator/data
+    var east_deg_sec = getprop("/fdm/jsbsim/velocities/vrp-v-east-deg_sec");
+    var north_deg_sec = getprop("/fdm/jsbsim/velocities/vrp-v-north-deg_sec");
+    var true_course_deg = math.atan2(east_deg_sec, north_deg_sec) * R2D;
+    #rotate true course pointer on compass
     true_course_indicator.setRotation(true_course_deg * D2R);
-    #update course data
+    if(true_course_deg < 0)
+      {true_course_deg = 360 + true_course_deg;}
+    #update true course data display
     true_course_data.setText(sprintf("%.0f Deg", true_course_deg));
 
 
