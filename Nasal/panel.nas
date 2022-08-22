@@ -49,12 +49,12 @@ var title = "Instruments";
         .setTranslation(50,50);
 
     var true_course_data = root.createChild("text")
-        .setText("True Course\n")
+        .setText("")
         .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
         .setFontSize(20, 0.9)          # font size (in texels) and font aspect ratio
         .setColor(0.136,0.433,0.11,1)             # green, fully opaque
         .setAlignment("center-center") # how the text is aligned to where you place it
-        .setTranslation(128, 140);     # where to place the text
+        .setTranslation(128, 143);     # where to place the text
 
     var hdg_ind = root.createChild("text")
       .setText("|")
@@ -72,7 +72,7 @@ var title = "Instruments";
       .setFontSize(20, 0.9)          # font size (in texels) and font aspect ratio
       .setColor(0,0,0,1)             # black, fully opaque
       .setAlignment("center-center") # how the text is aligned to where you place it
-      .setTranslation(128, 110);     # where to place the text
+      .setTranslation(128, 107);     # where to place the text
 
 
 
@@ -337,7 +337,7 @@ var update = func(){
 #print("SHIP HDG:" ~ hdg);
 
     #update groundspeed
-    groundspeed.setText(sprintf("%.1f Kts", getprop("/velocities/groundspeed-kt")));
+    groundspeed.setText(sprintf("%.1f\nKts", getprop("/velocities/groundspeed-kt")));
 
     #update wind indicator/data
     var wind_deg=getprop("/environment/wind-from-heading-deg");
@@ -357,15 +357,23 @@ var update = func(){
     wave_data.setText(sprintf("Wave\n%.0f : ", wave));
 
     #update true course_data indicator/data
-    var east_deg_sec = getprop("/fdm/jsbsim/velocities/vrp-v-east-deg_sec");
-    var north_deg_sec = getprop("/fdm/jsbsim/velocities/vrp-v-north-deg_sec");
-    var true_course_deg = math.atan2(east_deg_sec, north_deg_sec) * R2D;
+#    var east_deg_sec = getprop("/fdm/jsbsim/velocities/vrp-v-east-deg_sec");
+#    var north_deg_sec = getprop("/fdm/jsbsim/velocities/vrp-v-north-deg_sec");
+#    var true_course_deg1 = math.atan2(east_deg_sec, north_deg_sec) * R2D;
+
+#    var east_deg_sec = getprop("/fdm/jsbsim/velocities/u-fps");
+#    var north_deg_sec = getprop("/fdm/jsbsim/velocities/v-fps");
+#    var true_course_deg1 = math.atan2(east_deg_sec, north_deg_sec);
+
+#    var true_course_deg_mag = getprop("/orientation/track-magnetic-deg");
+
+    var true_course_deg = getprop("/orientation/track-deg");
     #rotate true course pointer on compass
     true_course_indicator.setRotation(true_course_deg * D2R);
-    if(true_course_deg < 0)
-      {true_course_deg = 360 + true_course_deg;}
+#    if(true_course_deg < 0)
+#      {true_course_deg = 360 + true_course_deg;}
     #update true course data display
-    true_course_data.setText(sprintf("%.0f Deg", true_course_deg));
+    true_course_data.setText(sprintf("Deg\n%.1f", true_course_deg));
 
 
 
