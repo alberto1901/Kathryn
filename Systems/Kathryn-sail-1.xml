@@ -23,19 +23,19 @@
      <table> <!-- angle of sail to wind -->
       <independentVar lookup="row">/surface-positions/sails/sail[1]/sail-beta-deg</independentVar>
       <tableData>
-        0   0.00
-       32   0.00
-       39   8.0
-       45   12
-       90   30
-       135  12
-       180  0.00
-       225 -12
-       270 -30
-       315 -12
-       321 -8.0
-       328  0.00
-       360  0.00
+        0    0.00
+       32    0.00
+       39    8.00
+       45   12.00
+       90   30.00
+       135  12.00
+       180   0.00
+       225 -12.00
+       270 -30.00
+       315 -12.00
+       321  -8.00
+       328   0.00
+       360   0.00
      </tableData>
     </table>
     </product>
@@ -51,15 +51,19 @@
      <table>
       <independentVar lookup="row">/surface-positions/sails/sail[1]/sail-beta-deg</independentVar>
       <tableData>
-           0    0.00
-          45    1.50
-          90    2.00
-          135   3.00
-          180   0.00
-          225   3.00
-          270   2.00
-          315   1.50
-          360   0.00
+        0   0.00
+       32   1.00
+       39   2.00
+       45   3.00
+       90   4.00
+       135  6.00
+       180  0.00
+       225  6.00
+       270  4.00
+       315  3.00
+       321  2.00
+       328  1.00
+       360  0.00
       </tableData>
       <!-- SQUARE SAIL -->
       <!--tableData>
@@ -77,7 +81,7 @@
 <!-- /axis -->
 <!--END OF DRAG AXIS -->
 
-<axis name="SIDE">
+<!-- axis name="SIDE" -->
 <!--
     aero/qbar-spf  (pounds per square foot of wind pressure)
   * square footage of sail
@@ -490,5 +494,5 @@
     </table -->
     </product>
    </function>
-</axis> <!-- END OF SIDE AXIS -->
+<!-- /axis--> <!-- END OF SIDE AXIS -->
  </system>

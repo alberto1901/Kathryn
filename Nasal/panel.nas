@@ -34,12 +34,26 @@ var title = "Instruments";
     child.setCenter(128,128);
     var compass = child;
 
+   #create an image for the heading indicator
+    var heading_indicator = root.createChild("image")
+        .setFile( "Aircraft/Kathryn/Instruments/heading_indicator.png" )
+        .setScale(1.0)
+        .setCenter(128,128);
+
+   #create an image for the wind indicator on the compass
+    var wind_indicator_compass = root.createChild("image")
+        .setFile( "Aircraft/Kathryn/Instruments/wind_indicator.png" )
+        .setScale(1.0)
+        .setCenter(128,128);
+
+
+
    #create an image for the course indicator compass
-    var true_course_compass = root.createChild("image")
-        .setFile( "Aircraft/Kathryn/Instruments/compass.png" )
-        .setScale(0.60)
-        .setCenter(128,128)
-        .setTranslation(52.5,50);
+#    var true_course_compass = root.createChild("image")
+#        .setFile( "Aircraft/Kathryn/Instruments/compass.png" )
+#        .setScale(0.60)
+#        .setCenter(128,128)
+#        .setTranslation(52.5,50);
 
    #create an image for the course indicator
     var true_course_indicator = root.createChild("image")
@@ -55,14 +69,6 @@ var title = "Instruments";
         .setColor(0.136,0.433,0.11,1)             # green, fully opaque
         .setAlignment("center-center") # how the text is aligned to where you place it
         .setTranslation(128, 143);     # where to place the text
-
-    var hdg_ind = root.createChild("text")
-      .setText("|")
-      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
-      .setFontSize(30, 0.9)          # font size (in texels) and font aspect ratio
-      .setColor(1,0,0,0.5)           # red, 50% opaque
-      .setAlignment("center-center") # how the text is aligned to where you place it
-      .setTranslation(128, 30);     # where to place the text
 
 
     #show speed
@@ -115,7 +121,7 @@ var title = "Instruments";
 
 
 
-   #create an image for the wind indicator
+   #create an image for the wind indicator on hull diagram
     var wind_indicator = root.createChild("image")
         .setFile( "Aircraft/Kathryn/Instruments/wind_indicator.png" )
         .setScale(0.75)
@@ -145,13 +151,6 @@ var title = "Instruments";
         .setColor(0,0,1,0.5)             # black, fully opaque
         .setAlignment("center-center") # how the text is aligned to where you place it
         .setTranslation(204, 425);     # where to place the text
-
-   #create an image for the course indicator
-#    var course_indicator = root.createChild("image")
-#        .setFile( "Aircraft/Kathryn/Instruments/course_indicator.png" )
-#        .setScale(0.65)
-#        .setCenter(128,128)
-#        .setTranslation(29,240);
 
 
     #active sail label
@@ -332,12 +331,13 @@ var update = func(){
 
     #update compass
     var hdg=getprop("/orientation/heading-deg");
-    compass.setRotation(-hdg*D2R);
+#    compass.setRotation(-hdg*D2R);
+    heading_indicator.setRotation(hdg*D2R);
 
 #print("SHIP HDG:" ~ hdg);
 
     #update groundspeed
-    groundspeed.setText(sprintf("%.1f\nKts", getprop("/velocities/groundspeed-kt")));
+    groundspeed.setText(sprintf("%.2f\nKts", getprop("/velocities/groundspeed-kt")));
 
     #update wind indicator/data
     var wind_deg=getprop("/environment/wind-from-heading-deg");
@@ -345,6 +345,8 @@ var update = func(){
 
 #print("-----------------------------------------------");
 #print("WIND COMING FROM DEG:" ~ wind_deg);
+
+    wind_indicator_compass.setRotation((wind_deg - 180)*D2R);
 
     #update the panel
     wind_indicator.setRotation((wind_deg - 180 - hdg)*D2R);
@@ -373,7 +375,7 @@ var update = func(){
 #    if(true_course_deg < 0)
 #      {true_course_deg = 360 + true_course_deg;}
     #update true course data display
-    true_course_data.setText(sprintf("Deg\n%.1f", true_course_deg));
+    true_course_data.setText(sprintf("Deg\n%.2f", true_course_deg));
 
 
 

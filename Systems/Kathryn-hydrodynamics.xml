@@ -58,12 +58,42 @@
  <property value="1.0">hydro/roll-tweak-factor</property>
  <property value="1.0">hydro/pitch-tweak-factor</property>
  <property value="1.0">hydro/yaw-tweak-factor</property>
- <property value="1.0">hydro/yaw-stability-tweak-factor</property>
+ <property value="2.0">hydro/yaw-stability-tweak-factor</property>
 
  <!-- The bx and by channels of the body frame are not used. -->
  <property value="0.0">hydro/fbx-lbs</property>
  <property value="0.0">hydro/fby-lbs</property>
 
+ <channel name="Enable/disable">
+
+  <fcs_function name="hydro/active-norm">
+   <description>
+    A property that is 0 when no part of the hull is in the water. The maximum value is 1.
+   </description>
+   <function>
+    <product>
+     <value>1.00</value>
+     <sum>
+      <property>hydro/buoyancy-lbs</property>
+      <property>hydro/planing-lift-lbs</property>
+     </sum>
+     <!-- not>
+      <and>
+       <property>contact/unit[0]/solid</property>
+       <property>contact/unit[1]/solid</property>
+       <property>contact/unit[2]/solid</property>
+       <property>contact/unit[3]/solid</property>
+      </and>
+     </not -->
+    </product>
+   </function>
+    <clipto>
+     <min>0.0</min>
+     <max>1.0</max>
+    </clipto>
+  </fcs_function>
+
+ </channel>
 
  <channel name="Common coefficients">
 
@@ -355,10 +385,31 @@
    </function>
   </fcs_function>
 
+  <fcs_function name="hydro/planing-drag-lbs">
+   <function>
+    <description>Drag due to planing. FIXME: for Body-X axis.</description>
+    <abs>
+     <sum>
+      <property>hydro/planing/forebody-induced-fbx-force-lbs</property>
+      <property>hydro/planing/middlebody-induced-fbx-force-lbs</property>
+      <property>hydro/planing/afterbody-induced-fbx-force-lbs</property>
+      <property>hydro/planing/forebody-friction-fbx-force-lbs</property>
+      <property>hydro/planing/middlebody-friction-fbx-force-lbs</property>
+      <property>hydro/planing/afterbody-friction-fbx-force-lbs</property>
+     </sum>
+   </abs>
+   </function>
+  </fcs_function>
 
   <fcs_function name="hydro/fdrag-lbs">
    <function>
+    <product>
+     <property>hydro/active-norm</property>
+     <sum>
       <property>hydro/displacement-drag-lbs</property>
+      <property>hydro/planing-drag-lbs</property>
+     </sum>
+   </product>
    </function>
   </fcs_function>
 
@@ -380,9 +431,29 @@
    </function>
   </fcs_function>
 
+  <fcs_function name="hydro/planing-side-lbs">
+   <function>
+    <description>Side force due to planing. FIXME: for Body-Y axis.</description>
+    <product>
+     <value>-1.0</value>
+     <sum>
+      <property>hydro/planing/forebody-fby-force-lbs</property>
+      <property>hydro/planing/middlebody-fby-force-lbs</property>
+      <property>hydro/planing/afterbody-fby-force-lbs</property>
+     </sum>
+    </product>
+   </function>
+  </fcs_function>
+
   <fcs_function name="hydro/fside-lbs">
    <function>
+    <product>
+     <property>hydro/active-norm</property>
+     <sum>
       <property>hydro/hull-side-lbs</property>
+      <property>hydro/planing-side-lbs</property>
+     </sum>
+    </product>
    </function>
   </fcs_function>
 
@@ -459,6 +530,17 @@
    </function>
   </fcs_function>
 
+  <fcs_function name="hydro/planing-lift-lbs">
+   <function>
+    <description>Lift due to planing.</description>
+    <sum>
+     <property>hydro/planing/forebody-lift-force-lbs</property>
+     <property>hydro/planing/middlebody-lift-force-lbs</property>
+     <property>hydro/planing/afterbody-lift-force-lbs</property>
+    </sum>
+   </function>
+  </fcs_function>
+
   <fcs_function name="hydro/damping-lift-lbs">
    <function>
     <product>
@@ -471,10 +553,14 @@
 
   <fcs_function name="hydro/fbz-lbs">
    <function>
+    <product>
+     <property>hydro/active-norm</property>
      <sum>
       <property>hydro/buoyancy-lbs</property>
+      <property>hydro/planing-lift-lbs</property>
       <property>hydro/damping-lift-lbs</property>
      </sum>
+    </product>
    </function>
   </fcs_function>
 
@@ -494,7 +580,8 @@
      <property>hydro/qbar-u-psf</property>
      <property>hydro/hull-beam-ft3</property>
      <sin><property>hydro/beta-rad</property></sin>
-     <value>0.9125</value> <!-- FIXME? Does beta have the right sign? -->
+     <!-- value>0.9125</value --> <!-- FIXME? Does beta have the right sign? -->
+        <value>0.2</value>
     </product>
    </function>
   </fcs_function>
@@ -517,13 +604,25 @@
    </function>
   </fcs_function>
 
+  <!-- fcs_function name="hydro/planing-yaw-moment-lbsft">
+   <documentation>
+    Yaw moment due to planing.
+   </documentation>
+   <function>
+    <sum>
+     <property>hydro/planing/forebody-yaw-moment-lbsft</property>
+     <property>hydro/planing/middlebody-yaw-moment-lbsft</property>
+     <property>hydro/planing/afterbody-yaw-moment-lbsft</property>
+    </sum>
+   </function>
+  </fcs_function -->
+
   <fcs_function name="hydro/damping-yaw-moment-lbsft">
    <documentation>
     Dampen yaw movements while in the water. Guessed.
    </documentation>
    <function>
     <product>
-     <!--value>0.0</value -->
      <value>-25000.0</value> <!-- Guess -->
      <property>hydro/yaw-tweak-factor</property>
      <property>velocities/psidot-rad_sec</property>
@@ -534,11 +633,16 @@
 
   <fcs_function name="hydro/yaw-moment-lbsft">
    <function>
+    <product>
+      <value>1.0</value>
+     <!--property>hydro/active-norm</property -->
      <sum>
-      <property>hydro/hull-yaw-moment-lbsft</property>
+      <property>hydro/hull-yaw-moment-lbsft</property><!--inhibits turning-->
+      <!--property>hydro/planing-yaw-moment-lbsft</property -->
       <property>hydro/rudder-yaw-moment-lbsft</property>
       <property>hydro/damping-yaw-moment-lbsft</property>
      </sum>
+    </product>
    </function>
   </fcs_function>
 
@@ -615,6 +719,18 @@
    </function>
   </fcs_function>
 
+  <fcs_function name="hydro/planing-pitch-moment-lbsft">
+   <description>
+    Pitch moment due to planing.
+   </description>
+   <function>
+    <sum>
+     <property>hydro/planing/forebody-pitch-moment-lbsft</property>
+     <property>hydro/planing/middlebody-pitch-moment-lbsft</property>
+     <property>hydro/planing/afterbody-pitch-moment-lbsft</property>
+    </sum>
+   </function>
+  </fcs_function>
 
   <fcs_function name="hydro/damping-pitch-moment-lbsft">
    <function>
@@ -628,11 +744,15 @@
 
   <fcs_function name="hydro/pitch-moment-lbsft">
    <function>
+    <product>
+     <property>hydro/active-norm</property>
      <sum>
       <property>hydro/buoyancy-pitch-moment-lbsft</property>
+      <property>hydro/planing-pitch-moment-lbsft</property>
       <!-- Numerical failure on startup? Try reducing pitch damping first. -->
       <property>hydro/damping-pitch-moment-lbsft</property>
      </sum>
+    </product>
    </function>
   </fcs_function>
 
@@ -709,6 +829,32 @@
    </function>
   </fcs_function>
 
+  <fcs_function name="hydro/fake-planing-roll-moment-lbsft">
+   <documentation>
+    Roll moment due to planing. Guessed.
+   </documentation>
+   <function>
+    <product>
+     <value>0.01</value>
+     <property>hydro/qbar-u-psf</property>
+     <property>hydro/buoyancy-roll-moment-lbsft</property>
+    </product>
+   </function>
+  </fcs_function>
+
+  <fcs_function name="hydro/planing-roll-moment-lbsft">
+   <description>
+    Roll moment due to planing.
+   </description>
+   <function>
+    <sum>
+     <property>hydro/planing/forebody-roll-moment-lbsft</property>
+     <property>hydro/planing/middlebody-roll-moment-lbsft</property>
+     <property>hydro/planing/afterbody-roll-moment-lbsft</property>
+    </sum>
+   </function>
+  </fcs_function>
+
   <!-- fcs_function name="hydro/rudder-roll-moment-lbsft">
    <documentation>
     Guessestimated roll moment due to rudder.
@@ -736,10 +882,15 @@
 
   <fcs_function name="hydro/roll-moment-lbsft">
    <function>
+    <product>
+     <property>hydro/active-norm</property>
      <sum>
       <property>hydro/buoyancy-roll-moment-lbsft</property>
+      <!-- property>hydro/fake-planing-roll-moment-lbsft</property -->
+      <property>hydro/planing-roll-moment-lbsft</property>
       <property>hydro/damping-roll-moment-lbsft</property>
      </sum>
+    </product>
    </function>
   </fcs_function>
 

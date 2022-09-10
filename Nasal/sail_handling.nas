@@ -118,10 +118,11 @@ stay_sail_tack = func(sail, hdg, wind_deg){
 
    setprop("surface-positions/sails/sail["~sail~"]/sail-beta-deg", math.abs(sail_facing - wind_deg)); #angle of sail from wind, 0 to 360 (I think!)
 
-#var sail_data = "Sail Facing: "~ sail_facing ~
-#                 "\nWind Dir: " ~ wind_deg ~
-#                 "\nDiff: "~  getprop("surface-positions/sails/sail["~sail~"]/sail-beta-deg");
-#gui.popupTip(sail_data);
+var sail_data = "Sail Facing: "~ sail_facing ~
+                 "\nWind Dir: " ~ wind_deg ~
+                 "\nDiff: "~  getprop("surface-positions/sails/sail["~sail~"]/sail-beta-deg") ~
+                 "\nSail2 D: " ~ getprop("/fdm/jsbsim/aero/force/D_sail-1-lbs");
+gui.popupTip(sail_data);
 
      #offset stay sail facing by 90
      if(90 < sail_facing)
