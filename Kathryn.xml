@@ -279,6 +279,39 @@
    </direction>
   </moment>
 
+<!-- SAILS THRUST -->
+   <force name="sails-X" frame="BODY" unit="LBS">
+   <location unit="M">
+     <x>  7.94 </x>
+     <y>  0.00 </y>
+     <z>  1.00 </z>
+   </location>
+   <direction>
+     <x> 1.0 </x>
+     <y> 0.0 </y>
+     <z> 0.0 </z>
+   </direction>
+  </force>
+
+<!-- SAILS ROLL/HEEL -->
+  <moment name="sails-heel" frame="BODY" unit="LBSFT">
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </moment>
+
+<!-- SAILS YAW -->
+  <moment name="sails-yaw" frame="BODY" unit="LBSFT">
+    <direction>
+    <x> 0.0 </x>
+    <y> 0.0 </y>
+    <z> 1.0 </z>
+    </direction>
+  </moment>
+
+
 <!-- ANCHORS -->
   <force name="kedge-X" frame="BODY" unit="LBS">
    <location unit="M">
@@ -323,8 +356,6 @@
 </system>
 
  <system file="visual-reference-point-extensions"/>
-
-
  <system file="hydrodynamics"/>
  <system file="Kathryn-hydrodynamics"/>
 
@@ -337,10 +368,10 @@
   <property value="-5.58">hydro/planing/forebody-keel-z-ft</property>
   <property value="29.95">hydro/planing/forebody-end-x-ft</property>
 -->
-<property value="0.0">hydro/planing/forebody-length-ft</property>
-<property value="0.0">hydro/planing/forebody-beam-ft</property>
-<property value="0.0">hydro/planing/forebody-keel-z-ft</property>
-<property value="0.0">hydro/planing/forebody-end-x-ft</property>
+  <property value="0.0">hydro/planing/forebody-length-ft</property>
+  <property value="0.0">hydro/planing/forebody-beam-ft</property>
+  <property value="0.0">hydro/planing/forebody-keel-z-ft</property>
+  <property value="0.0">hydro/planing/forebody-end-x-ft</property>
 
   <property value="0.0">hydro/planing/middlebody-length-ft</property>
   <property value="0.0">hydro/planing/middlebody-beam-ft</property>
@@ -367,31 +398,68 @@
  <system file="Kathryn-sail-0"/>  <!-- jib -->
  <system file="Kathryn-sail-1"/>  <!-- mainsail -->
 
+  <system name="sails-thrust">
+  <channel name="sailing">
+      <summer name="sailing-thrust">
+        <input>aero/force/D_sail-0-lbs</input>
+        <input>aero/force/D_sail-1-lbs</input>
+        <clipto>
+          <min>0.0</min>
+          <max>75.0</max>
+        </clipto>
+        <output> external_reactions/sails-X/magnitude </output>
+      </summer>
+  </channel>
+  </system>
+
+  <system name="sails-heel">
+  <channel name="sailing">
+      <summer name="sailing-heel">
+        <input>aero/moment/heel_sail-0-lbsft</input>
+        <input>aero/moment/heel_sail-1-lbsft</input>
+        <output>external_reactions/sails-heel/magnitude-lbsft</output>
+      </summer>
+  </channel>
+  </system>
+
+<!--
+  <system name="sails-yaw">
+  <channel name="sailing">
+      <summer name="sailing-yaw">
+        <input>aero/moment/yaw_sail-1-lbsft</input>
+        <input>aero/moment/yaw_sail-0-lbsft</input>
+        <output>external_reactions/sails-yaw/magnitude-lbsft</output>
+      </summer>
+  </channel>
+  </system>
+-->
+
+
  <aerodynamics>
-   <axis name="DRAG">
+   <!--axis name="DRAG">
      <function name="sail-drag">
        <sum>
          <property>aero/force/D_sail-1-lbs</property>
          <property>aero/force/D_sail-0-lbs</property>
        </sum>
      </function>
-   </axis> <!--END OF DRAG AXIS -->
+   </axis --> <!--END OF DRAG AXIS -->
 
-   <axis name="SIDE">
+   <!-- axis name="SIDE">
      <sum>
        <property>/aero/force/Y_sail-1-lbs</property>
        <property>/aero/force/Y_sail-0-lbs</property>
      </sum>
-   </axis> <!-- END OF SIDE AXIS -->
+   </axis --> <!-- END OF SIDE AXIS -->
 
-  <axis name="YAW">
+  <!-- axis name="YAW">
     <function name="sail-yaw">
       <sum>
         <property>aero/moment/Y_sail-1-lbsft</property>
         <property>aero/moment/Y_sail-0-lbsft</property>
       </sum>
     </function>
-  </axis>
+  </axis -->
 
  </aerodynamics>
 

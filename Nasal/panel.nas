@@ -251,6 +251,32 @@ var title = "Instruments";
       .setAlignment("center-center") # how the text is aligned to where you place it
       .setTranslation(128, 775);     # where to place the text
 
+    #Legend
+      var legend_wind_text = root.createChild("text")
+      .setText("^ Wind direction")
+      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+      .setFontSize(12, 0.9)          # font size (in texels) and font aspect ratio
+      .setColor(0,0,1,0.5)           # blue, fully opaque
+      .setAlignment("center-center") # how the text is aligned to where you place it
+      .setTranslation(128, 800);     # where to place the text
+
+      var legend_course_text = root.createChild("text")
+      .setText("^ True course")
+      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+      .setFontSize(12, 0.9)          # font size (in texels) and font aspect ratio
+      .setColor(0.136,0.433,0.11,1)
+      .setAlignment("center-center") # how the text is aligned to where you place it
+      .setTranslation(128, 815);     # where to place the text
+
+      var legend_heading_text = root.createChild("text")
+      .setText("| Heading")
+      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+      .setFontSize(12, 0.9)          # font size (in texels) and font aspect ratio
+      .setColor(1,0,0,0.5)           # blue, fully opaque
+      .setAlignment("center-center") # how the text is aligned to where you place it
+      .setTranslation(128, 830);     # where to place the text
+
+
 
      #create an image for the texture
      var floatgear_logo = root.createChild("image")

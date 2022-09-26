@@ -122,7 +122,7 @@ var sail_data = "Sail Facing: "~ sail_facing ~
                  "\nWind Dir: " ~ wind_deg ~
                  "\nDiff: "~  getprop("surface-positions/sails/sail["~sail~"]/sail-beta-deg") ~
                  "\nSail2 D: " ~ getprop("/fdm/jsbsim/aero/force/D_sail-1-lbs");
-#gui.popupTip(sail_data);
+ #gui.popupTip(sail_data);
 
      #offset stay sail facing by 90
      if(90 < sail_facing)
