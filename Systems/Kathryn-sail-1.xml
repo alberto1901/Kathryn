@@ -53,14 +53,14 @@
       <independentVar lookup="row">/surface-positions/sails/sail[1]/sail-beta-deg</independentVar>
       <tableData>
         0   0.0
-        45  0.5
-        90  1.0
-       135  0.5
+        45 -0.5
+        90 -1.0
+       135 -0.5
        180  0.0
-       225 -0.5
-       270 -1.0
-       315 -0.5
-       360 0.0
+       225  0.5
+       270  1.0
+       315  0.5
+       360  0.0
      </tableData>
     </table>
     </product>
@@ -78,17 +78,17 @@
       <independentVar lookup="row">/surface-positions/sails/sail[1]/sail-beta-deg</independentVar>
 <tableData>
   0   0.00
- 32   0.16
- 39   0.33
- 45   0.50
- 90   0.66
- 135  1.00
+ 32   0.08
+ 39   0.16
+ 45   0.25
+ 90   0.33
+ 135  0.50
  180  0.00
- 225  1.00
- 270  0.66
- 315  0.50
- 321  0.33
- 328  0.16
+ 225  0.50
+ 270  0.33
+ 315  0.25
+ 321  0.16
+ 328  0.08
  360  0.00
 </tableData>
       <!-- tableData>

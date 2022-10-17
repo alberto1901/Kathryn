@@ -302,6 +302,20 @@
    </direction>
   </moment>
 
+<!-- SAILS LEEWAY -->
+  <force name="sails-leeway" frame="BODY" unit="LBS">
+   <location unit="M">
+     <x>  7.94 </x>
+     <y>  0.00 </y>
+     <z>  1.00 </z>
+   </location>
+   <direction>
+    <x> 0.0 </x>
+    <y> 1.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+
 <!-- SAILS YAW -->
   <moment name="sails-yaw" frame="BODY" unit="LBSFT">
     <direction>
@@ -394,9 +408,9 @@
 </system>
 
 
- <!-- system file="Kathryn-hull"/ -->
- <system file="Kathryn-sail-0"/>  <!-- jib -->
- <system file="Kathryn-sail-1"/>  <!-- mainsail -->
+  <!-- system file="Kathryn-hull"/ -->  <!-- hull -->
+  <system file="Kathryn-sail-0"/>  <!-- jib -->
+  <system file="Kathryn-sail-1"/>  <!-- mainsail -->
 
   <system name="sails-thrust">
   <channel name="sailing">
@@ -421,6 +435,37 @@
       </summer>
   </channel>
   </system>
+
+
+<system name="hull-leeway">
+  <channel name="sailing">
+  <fcs_function>
+    <description>( degrees(?) of leeway  =  Konstant * heel / speed squared )  https://sailboatinstruments.blogspot.com/2011/02/leeway-calibration.html</description>
+    <function name="hull-leeway">
+      <quotient>
+        <product>
+          <value>10</value> <!-- Konstant; see discussion: https://forums.sailinganarchy.com/threads/h5000-leeway-coefficient.198577/ -->
+          <property>/fdm/jsbsim/hydro/hull/roll-deg</property>
+        </product>
+        <sum>
+            <value>0.0001</value> <!-- avoid divide by zero error and segfault-->
+            <product>
+              <property>/velocities/groundspeed-kt</property>
+              <property>/velocities/groundspeed-kt</property>
+            </product>
+        </sum>
+      </quotient>
+    </function>
+  </fcs_function>
+
+  <summer name="leeway">
+    <input>hull-leeway</input>
+    <output>external_reactions/sails-leeway/magnitude</output>
+  </summer>
+
+  </channel>
+</system>
+
 
 <!--
   <system name="sails-yaw">

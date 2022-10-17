@@ -357,19 +357,54 @@
 
 
 <!-- PENNANT ==============================================================-->
-  <animation> <!-- lift and drop dependent on wind speed -->
+  <animation>  <!-- rotate dependent on wind direction -->
+  <type>rotate</type>
+  <expression>
+    <sum>
+      <property>/orientation/heading-deg</property>
+      <property>environment/wind-from-heading-deg</property>
+    </sum>
+  </expression>
+  <object-name>pennant_hull_bottom</object-name>
+  <center>
+   <x-m> 6.057688 </x-m>
+   <y-m> 0.049165 </y-m>
+   <z-m> 18.282824 </z-m>
+  </center>
+  <axis>
+   <x> 0.0 </x>
+   <y> 0.0 </y>
+   <z> 1.0 </z>
+  </axis>
+ </animation>
+
+
+ <!-- lift and drop dependent on wind speed -->
+  <animation>
   <type>rotate</type>
   <object-name>pennant_hull_bottom</object-name>
-  <property>/environment/wind-speed-kt</property>
+  <property>/sim/model/binocular_pitch</property>
   <interpolation>
      <entry>
        <ind> 0.0</ind>
-       <dep> -60.0</dep>
+       <dep> -10.0</dep>
      </entry>
-     <entry>
-       <ind> 15</ind>
-       <dep> 10</dep>
-     </entry>
+       <entry>
+         <ind> 15 </ind>
+         <dep> -25</dep>
+       </entry>
+      <entry>
+        <ind>30</ind>
+        <dep>0.0</dep>
+      </entry>
+       <entry>
+         <ind> 45 </ind>
+         <dep> 25</dep>
+       </entry>
+       <entry>
+         <ind> 60</ind>
+         <dep> 15.0</dep>
+       </entry>
   </interpolation>
   <center>
    <x-m> 6.057688 </x-m>
@@ -377,26 +412,56 @@
    <z-m> 18.282824 </z-m>
   </center>
   <axis>
-   <x> 1.0 </x>
+   <x> 0.0 </x>
    <y> 1.0 </y>
    <z> 0.0 </z>
   </axis>
  </animation>
 
-  <animation>  <!-- rotate dependent on wind direction -->
-  <type>rotate</type>
+<animation>
+  <type>spin</type>
   <object-name>pennant_hull_bottom</object-name>
-  <expression>
-    <product>
-    <value>-1</value>
-    <sum>
-      <property>/environment/wind-from-heading-deg</property>
-      <value>180</value>
-    </sum>
-  </product>
-  </expression>
-  <factor>1.0</factor>
-  <offset-deg>0.0</offset-deg>
+  <!--sum>
+    <property>/environment/wind-speed-kt</property -->
+    <property>/sim/model/binocular_pitch</property>
+  <!-- /sum -->
+    <interpolation>
+      <entry>
+        <ind> 0</ind>
+        <dep> 15.0</dep>
+      </entry>
+       <entry>
+         <ind> 13 </ind>
+         <dep> -20</dep>
+       </entry>
+       <entry>
+         <ind> 15 </ind>
+         <dep> 25</dep>
+       </entry>
+       <entry>
+         <ind> 30 </ind>
+         <dep> 20</dep>
+       </entry>
+       <entry>
+         <ind> 45 </ind>
+         <dep> -25</dep>
+       </entry>
+       <entry>
+         <ind> 52 </ind>
+         <dep> 20</dep>
+       </entry>
+       <entry>
+         <ind> 60</ind>
+         <dep> -15.0</dep>
+       </entry>
+    </interpolation>
+<interpolation>
+         <entry><ind>  0.0 </ind><dep>  0.0 </dep></entry>
+         <entry><ind> 23.3 </ind><dep>  6.0 </dep></entry>
+         <entry><ind> 54.0 </ind><dep> 19.5 </dep></entry>
+         <entry><ind>100.0 </ind><dep>  0.0 </dep></entry>
+      </interpolation>
+
   <center>
    <x-m> 6.057688 </x-m>
    <y-m> 0.049165 </y-m>
@@ -405,9 +470,10 @@
   <axis>
    <x> 1.0 </x>
    <y> 0.0 </y>
-   <z> 1.0 </z>
+   <z> 0.0 </z>
   </axis>
- </animation>
+</animation>
+
 
 
 
