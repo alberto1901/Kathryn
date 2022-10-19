@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-USS OLYMPIA gyro compass instrument.
+Kathryn gyro compass instrument.
 
 -->
 
@@ -12,7 +12,7 @@ USS OLYMPIA gyro compass instrument.
       <layer>
         <name>compass rose</name>
         <texture>
-          <path>Aircraft/USS_Olympia/Instruments/compass.png</path>
+          <path>Aircraft/Kathryn/Instruments/compass.png</path>
           <x1>0.0</x1>
           <y1>0.515625</y1>
           <x2>0.484375</x2>

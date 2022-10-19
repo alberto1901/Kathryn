@@ -12,7 +12,7 @@ var CanvasApplication = {
       return m;
    },
 
-   del: func() { 
+   del: func() {
         print("Stopping the timer");
         me.timer.stop();
     },
@@ -32,16 +32,16 @@ var CanvasApplication = {
    init: func() {
 
      #Gyro Compass
-     var filename = "Aircraft/USS_Olympia/Instruments/gyro.xml";
+     var filename = "Aircraft/Kathryn/Instruments/gyro.xml";
      var temp = io.read_properties(filename);
      var layers = temp.getValues().layers.layer;
 
  #    var z=100;
        #create an image child for the texture
        var child=me.root.createChild("image")
-           .setFile( "Aircraft/USS_Olympia/Instruments/compass.png" )
+           .setFile( "Aircraft/Kathryn/Instruments/compass.png" )
            .setScale(1);
-     
+
           child.setCenter(128,128);
           me.compass = child;
 
@@ -53,7 +53,7 @@ var CanvasApplication = {
       .setColor(1,0,0,1)             # red, fully opaque
       .setAlignment("center-center") # how the text is aligned to where you place it
       .setTranslation(140, 280);     # where to place the text
-    
+
       me.groundspeed = gs;
 
 
@@ -70,5 +70,3 @@ var InstrumentWidget = {
 
 var panel = InstrumentWidget.new(x:900, y:300);
 print("Compass Loaded...!");
-
-

@@ -87,9 +87,13 @@ square_sail_tack = func(sail, hdg, wind_deg){
 
     #determine whether to show port or stbd sail set depending on which side of sail facing the wind is coming from
     if(diff > 90)
-      {setprop("surface-positions/sails/sail["~sail~"]/sail-set", "stbd")}
+      {setprop("surface-positions/sails/sail["~sail~"]/sail-set", "stbd");
+       setprop("surface-positions/sails/sail["~sail~"]/sail-set-norm", 1)
+      }
     else
-      {setprop("surface-positions/sails/sail["~sail~"]/sail-set", "port")};
+      {setprop("surface-positions/sails/sail["~sail~"]/sail-set", "port");
+       setprop("surface-positions/sails/sail["~sail~"]/sail-set-norm", -1)
+      };
 
     #fill the sail
     sail_fill(sail, diff);

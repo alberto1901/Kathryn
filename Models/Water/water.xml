@@ -17,7 +17,7 @@
 
  <!-- Wave shader -->
  <effect>
-  <inherits-from>Aircraft/USS_Olympia/Models/Effects/water</inherits-from>
+  <inherits-from>Aircraft/Kathryn/Models/Effects/water</inherits-from>
   <object-name>Water</object-name>
  </effect>
 
@@ -25,7 +25,8 @@
   <type>translate</type>
   <object-name>Water</object-name>
   <property>fdm/jsbsim/hydro/height-agl-ft</property>
-  <factor>-0.3048</factor>
+  <!--factor>-0.3048</factor -->
+  <factor>0.010</factor>
   <axis>
    <x>0.0</x>
    <y>0.0</y>

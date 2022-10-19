@@ -482,6 +482,7 @@ setlistener("/sim/signals/fdm-initialized", func {
        <sail-beta-deg>0</sail-beta-deg>                               <!-- used in calculating sail drag and side forces -->
        <sail-trim-max>45</sail-trim-max>                              <!-- maximum degree of allowable trim -->
        <sail-set type="string">stbd</sail-set>                        <!-- showing port or stbd model -->
+       <sail-set-norm type="double">-1</sail-set-norm>                   <!-- showing port (-1) or stbd (1)-->
        <sail-bearing-deg type="double">1.0</sail-bearing-deg>         <!-- offset from bow -->
        <sail-bearing-norm type="double">0.0</sail-bearing-norm>       <!-- sail-bearing divided by max trim to give -1.0 to +1.0 value -->
        <sail-bearing-hdg-deg type="double">0.0</sail-bearing-hdg-deg> <!-- adjusted by ship heading -->
@@ -501,6 +502,7 @@ setlistener("/sim/signals/fdm-initialized", func {
        <sail-beta-deg>0</sail-beta-deg>                               <!-- used in calculating sail drag and side forces -->
        <sail-trim-max>45</sail-trim-max>                              <!-- maximum degree of allowable trim -->
        <sail-set type="string">stbd</sail-set>                        <!-- showing port or stbd model-->
+       <sail-set-norm type="double">1</sail-set-norm>                   <!-- showing port (-1) or stbd  (1) -->
        <sail-bearing-deg type="double">1.0</sail-bearing-deg>         <!-- offset from bow-->
        <sail-bearing-norm type="double">0.0</sail-bearing-norm>       <!-- sail-bearing divided by max trim to give -1.0 to +1.0 value -->
        <sail-bearing-hdg-deg type="double">0.0</sail-bearing-hdg-deg> <!-- adjusted by ship heading-->
