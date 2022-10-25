@@ -16,22 +16,17 @@
      <property>/surface-positions/sails/sail[0]/sail-sqft</property> <!-- square footage of sail -->
      <property>/surface-positions/sails/sail[0]/sail-reef-norm</property> <!-- percentage of square footage exposed to wind -->
      <property>/surface-positions/sails/sail[0]/sail-cof-x</property> <!-- distance from COG -->
+     <property>/surface-positions/sails/sail[0]/sail-set-norm</property> <!-- to port or stbd? -->
      <table> <!-- angle of sail to wind -->
       <independentVar lookup="row">/surface-positions/sails/sail[0]/sail-beta-deg</independentVar>
       <tableData>
-        0    0.00
-       32    0.00
-       39   -8.0
-       45   -12
-       90   -30
-       135  -12
-       180   0.00
-       225   12
-       270   30
-       315   12
-       321   8.0
-       328   0.00
-       360   0.00
+        0   0.00
+       32   0.00
+       39   1.00
+       45   1.50
+       90   2.50
+       135  1.50
+       180  0.00
      </tableData>
     </table>
     </product>
@@ -82,8 +77,8 @@
 112  0.45
 135  0.40
 157  0.25
-161  0.15
-164  0.04
+161  0.06
+164  0.00
 180  0.00
 </tableData>
 

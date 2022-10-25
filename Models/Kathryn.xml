@@ -176,7 +176,7 @@
     <object-name>jib_boom_wood</object-name>
     <object-name>sail_jib_furled_sails</object-name>
     <property>surface-positions/sails/sail[0]/sail-bearing-deg</property>
-    <factor>-1.0</factor>
+    <factor>-0.5</factor>
     <!-- offset-deg>0.0</offset-deg -->
     <axis>
      <x1-m> 5.120957  </x1-m>
@@ -282,7 +282,7 @@
   <object-name>aft_stay_winder</object-name>
   <object-name>sail_main_furled_sails</object-name>
   <property>surface-positions/sails/sail[1]/sail-bearing-deg</property>
-  <factor>-1.0</factor>
+  <factor>-0.5</factor>
   <offset-deg>0.0</offset-deg>
   <axis>
    <x1-m> 6.251835</x1-m>

@@ -55,7 +55,7 @@
  <property value="1.0">hydro/drag-tweak-factor</property>
  <property value="1.0">hydro/side-tweak-factor</property>
  <property value="1.0">hydro/lift-tweak-factor</property>
- <property value="1.0">hydro/roll-tweak-factor</property>
+ <property value="0.3">hydro/roll-tweak-factor</property>
  <property value="1.0">hydro/pitch-tweak-factor</property>
  <property value="1.0">hydro/yaw-tweak-factor</property>
  <property value="2.0">hydro/yaw-stability-tweak-factor</property>

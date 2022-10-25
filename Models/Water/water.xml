@@ -21,6 +21,11 @@
   <object-name>Water</object-name>
  </effect>
 
+<animation>
+  <type>noshadow</type>
+  <object-name>Water</object-name>
+</animation>
+
  <animation>
   <type>translate</type>
   <object-name>Water</object-name>

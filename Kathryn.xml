@@ -466,8 +466,6 @@
   </channel>
 </system>
 
-
-<!--
   <system name="sails-yaw">
   <channel name="sailing">
       <summer name="sailing-yaw">
@@ -477,7 +475,6 @@
       </summer>
   </channel>
   </system>
--->
 
 
  <aerodynamics>

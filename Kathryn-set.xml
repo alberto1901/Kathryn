@@ -238,7 +238,7 @@ setlistener("/sim/signals/fdm-initialized", func {
       <binding>
         <command>property-adjust</command>
         <property>/controls/flight/rudder</property>
-        <step type="double">-0.05</step>
+        <step type="double">-0.02</step>
       </binding>
     </key>
 
@@ -249,7 +249,7 @@ setlistener("/sim/signals/fdm-initialized", func {
       <binding>
         <command>property-adjust</command>
         <property>/controls/flight/rudder</property>
-        <step type="double">0.05</step>
+        <step type="double">0.02</step>
       </binding>
     </key>
 
