@@ -327,6 +327,32 @@
 
 
 <!-- ANCHORS -->
+     <force name="anchoring-coupling-north" frame="LOCAL">
+      <location unit="M">
+        <x> 0.00 </x>
+        <y> 0.00 </y>
+        <z> 0.00 </z>
+      </location>
+      <direction>
+       <x> 1.0 </x>
+       <y> 0.0 </y>
+       <z> 0.0 </z>
+      </direction>
+     </force>
+
+     <force name="anchoring-coupling-east" frame="LOCAL">
+      <location unit="M">
+        <x> 0.00 </x>
+        <y> 0.00 </y>
+        <z> 0.00 </z>
+      </location>
+      <direction>
+       <x> 0.0 </x>
+       <y> 1.0 </y>
+       <z> 0.0 </z>
+      </direction>
+     </force>
+
   <force name="kedge-X" frame="BODY" unit="LBS">
    <location unit="M">
     <x> 0.00 </x>
@@ -407,13 +433,15 @@
   <property value="0.0">hydro/planing/afterbody-skin-friction-coefficient</property>
 </system>
 
-
   <!-- system file="Kathryn-hull"/ -->  <!-- hull -->
+  <system file="Kathryn-anchor"/>  <!-- anchor -->
+
   <system file="Kathryn-sail-0"/>  <!-- jib -->
   <system file="Kathryn-sail-1"/>  <!-- mainsail -->
-
   <system name="sails-thrust">
+
   <channel name="sailing">
+
       <summer name="sailing-thrust">
         <input>aero/force/D_sail-0-lbs</input>
         <input>aero/force/D_sail-1-lbs</input>
@@ -437,14 +465,14 @@
   </system>
 
 
-<system name="hull-leeway">
+  <system name="hull-leeway">
   <channel name="sailing">
   <fcs_function>
     <description>( degrees(?) of leeway  =  Konstant * heel / speed squared )  https://sailboatinstruments.blogspot.com/2011/02/leeway-calibration.html</description>
     <function name="hull-leeway">
       <quotient>
         <product>
-          <value>10</value> <!-- Konstant; see discussion: https://forums.sailinganarchy.com/threads/h5000-leeway-coefficient.198577/ -->
+          <value>15</value> <!-- Konstant; see discussion: https://forums.sailinganarchy.com/threads/h5000-leeway-coefficient.198577/ -->
           <property>/fdm/jsbsim/hydro/hull/roll-deg</property>
         </product>
         <sum>
@@ -478,30 +506,6 @@
 
 
  <aerodynamics>
-   <!--axis name="DRAG">
-     <function name="sail-drag">
-       <sum>
-         <property>aero/force/D_sail-1-lbs</property>
-         <property>aero/force/D_sail-0-lbs</property>
-       </sum>
-     </function>
-   </axis --> <!--END OF DRAG AXIS -->
-
-   <!-- axis name="SIDE">
-     <sum>
-       <property>/aero/force/Y_sail-1-lbs</property>
-       <property>/aero/force/Y_sail-0-lbs</property>
-     </sum>
-   </axis --> <!-- END OF SIDE AXIS -->
-
-  <!-- axis name="YAW">
-    <function name="sail-yaw">
-      <sum>
-        <property>aero/moment/Y_sail-1-lbsft</property>
-        <property>aero/moment/Y_sail-0-lbsft</property>
-      </sum>
-    </function>
-  </axis -->
 
  </aerodynamics>
 

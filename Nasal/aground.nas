@@ -74,20 +74,20 @@ var refloat = func() {
 #anchor the vessel
 var weigh_anchor = func() {
 
-      gui.popupTip("Raising Anchor");
-      interpolate("/fdm/jsbsim/hydro/drag-tweak-factor", 1, 10);
-      interpolate("/fdm/jsbsim/hydro/yaw-tweak-factor", 1, 10);
-      setprop("/fdm/jsbsim/hydro/pitch-tweak-factor", 1);
-#      setprop("/fdm/jsbsim/hydro/roll-tweak-factor", 0.3);
-      setprop("/position/anchored", "false");
+      gui.popupTip("Weigh Anchor!");
+       setprop("/fdm/jsbsim/anchoring/cable-connected", 0.0);
+       setprop("/fdm/jsbsim/anchoring/latitude-deg", 0.0);
+       setprop("/fdm/jsbsim/anchoring/longitude-deg", 0.0);
+       interpolate("/fdm/jsbsim/hydro/yaw-tweak-factor", 1, 10);
+       setprop("/position/anchored", "false");
 }
 
 var drop_anchor = func() {
 
-      gui.popupTip("Dropping Anchor");
-      interpolate("/fdm/jsbsim/hydro/drag-tweak-factor", 1000, 10);
-      interpolate("/fdm/jsbsim/hydro/yaw-tweak-factor", 10000, 10);
-      setprop("/fdm/jsbsim/hydro/pitch-tweak-factor", 0.0001);
-#      setprop("/fdm/jsbsim/hydro/roll-tweak-factor", 0.3);
-      setprop("/position/anchored", "true");
+      gui.popupTip("Drop Anchor!");
+       setprop("/fdm/jsbsim/anchoring/cable-connected", 1.0);
+       setprop("/fdm/jsbsim/anchoring/latitude-deg", getprop("/fdm/jsbsim/position/vrp-latitude-deg"));
+       setprop("/fdm/jsbsim/anchoring/longitude-deg", getprop("/fdm/jsbsim/position/vrp-longitude-deg"));
+       interpolate("/fdm/jsbsim/hydro/yaw-tweak-factor", 1000, 10);
+       setprop("/position/anchored", "true");
 }

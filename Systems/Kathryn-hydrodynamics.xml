@@ -55,7 +55,7 @@
  <property value="1.0">hydro/drag-tweak-factor</property>
  <property value="1.0">hydro/side-tweak-factor</property>
  <property value="1.0">hydro/lift-tweak-factor</property>
- <property value="0.3">hydro/roll-tweak-factor</property>
+ <property value="1.0">hydro/roll-tweak-factor</property>
  <property value="1.0">hydro/pitch-tweak-factor</property>
  <property value="1.0">hydro/yaw-tweak-factor</property>
  <property value="2.0">hydro/yaw-stability-tweak-factor</property>
@@ -316,6 +316,7 @@
     </sum>
    </function>
   </fcs_function>
+
   <fcs_function name="hydro/hull/pitch-rad">
    <description>
     The hull pitch with the trim change due to waves and the displacement wave applied.
@@ -349,6 +350,7 @@
     </sum>
    </function>
   </fcs_function>
+
   <fcs_function name="hydro/hull/roll-rad">
    <description>
     The hull roll with the trim change due to waves and the displacement wave applied.

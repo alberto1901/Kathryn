@@ -172,57 +172,6 @@
     <file>Aircraft/Kathryn/Nasal/panel.nas</file>
   </panel>
 
-   <script>
-###############################################################################
-var ground = func {
-    # Send the current ground level to the JSBSim hydrodynamics model.
-    var pos = geo.aircraft_position();
-    var material = geodinfo(pos.lat(), pos.lon());
-    if (contains(material[1], "solid") and !material[1].solid) {
-        setprop("/fdm/jsbsim/hydro/environment/water-level-ft",
-                getprop("/position/ground-elev-ft") +
-                1.1*getprop("/fdm/jsbsim/hydro/environment/wave-amplitude-ft"));
-    }
-
-    # Connect the FlightGear wave model to the JSBSim hydrodynamics wave model.
-    #setprop("/fdm/jsbsim/hydro/environment/waves-from-deg",
-    #        getprop("/environment/wave/angle") - 90.0);
-    #setprop("/fdm/jsbsim/hydro/environment/wave-amplitude-ft",
-    #        getprop("/environment/wave/amp"));
-    # Additional properties:
-    #   /environment/wave/dangle
-    #   /environment/wave/factor
-    #   /environment/wave/freq
-    #   /environment/wave/sharp
-
-    # Connect the JSBSim hydrodynamics wave model with the custom water shader.
-    setprop("environment/waves/time-sec",
-            getprop("/fdm/jsbsim/simulation/sim-time-sec"));
-    setprop("environment/waves/from-deg",
-            getprop("/fdm/jsbsim/hydro/environment/waves-from-deg"));
-    setprop("environment/waves/length-ft",
-            getprop("/fdm/jsbsim/hydro/environment/wave-length-ft"));
-    setprop("environment/waves/amplitude-ft",
-            getprop("/fdm/jsbsim/hydro/environment/wave-amplitude-ft"));
-    setprop("environment/waves/angular-frequency-rad_sec",
-            getprop("/fdm/jsbsim/hydro/environment/wave/angular-frequency-rad_sec"));
-    setprop("environment/waves/wave-number-rad_ft",
-            getprop("/fdm/jsbsim/hydro/environment/wave/wave-number-rad_ft"));
-
-
-    settimer(ground, 0.0);
-}
-
-var _initialized = 0;
-setlistener("/sim/signals/fdm-initialized", func {
-    if (_initialized) return;
-    #aircraft.livery.init("Aircraft/Kathryn/Models/Liveries");
-    settimer(ground, 0.0);
-    print("Hydrodynamics initialized.");
-    _initialized = 1;
-});
-
-   </script>
  </nasal>
 
 
@@ -450,6 +399,8 @@ setlistener("/sim/signals/fdm-initialized", func {
     <anchored type="bool">false</anchored>
   </position>
 
+
+
 <!-- SURFACES -->
  <surface-positions>
    <hull>
@@ -482,7 +433,7 @@ setlistener("/sim/signals/fdm-initialized", func {
        <sail-beta-deg>0</sail-beta-deg>                               <!-- used in calculating sail drag and side forces -->
        <sail-trim-max>45</sail-trim-max>                              <!-- maximum degree of allowable trim -->
        <sail-set type="string">stbd</sail-set>                        <!-- showing port or stbd model -->
-       <sail-set-norm type="double">-1</sail-set-norm>                   <!-- showing port (-1) or stbd (1)-->
+       <sail-set-norm type="double">-1</sail-set-norm>                <!-- showing port (-1) or stbd (1)-->
        <sail-bearing-deg type="double">1.0</sail-bearing-deg>         <!-- offset from bow -->
        <sail-bearing-norm type="double">0.0</sail-bearing-norm>       <!-- sail-bearing divided by max trim to give -1.0 to +1.0 value -->
        <sail-bearing-hdg-deg type="double">0.0</sail-bearing-hdg-deg> <!-- adjusted by ship heading -->
@@ -495,14 +446,14 @@ setlistener("/sim/signals/fdm-initialized", func {
        <sail-name>main</sail-name>
        <sail-sqft>1054.66</sail-sqft>                                 <!-- total area of sail added up in Wings -->
        <sail-cof-x>9.0638</sail-cof-x>                                <!-- Blender center of mass -->
-       <sail-cof-y>0.00</sail-cof-y>                                   <!-- not yet implemented -->
+       <sail-cof-y>0.00</sail-cof-y>                                  <!-- not yet implemented -->
        <sail-cof-z>7.2009</sail-cof-z>                                <!-- Blender center of mass -->
        <sail-type>stay</sail-type>                                    <!-- square sail or stay sail -->
        <sail-selected type="bool">1</sail-selected>                   <!-- sail selection flag -->
        <sail-beta-deg>0</sail-beta-deg>                               <!-- used in calculating sail drag and side forces -->
        <sail-trim-max>45</sail-trim-max>                              <!-- maximum degree of allowable trim -->
        <sail-set type="string">stbd</sail-set>                        <!-- showing port or stbd model-->
-       <sail-set-norm type="double">1</sail-set-norm>                   <!-- showing port (-1) or stbd  (1) -->
+       <sail-set-norm type="double">1</sail-set-norm>                  <!-- showing port (-1) or stbd  (1) -->
        <sail-bearing-deg type="double">1.0</sail-bearing-deg>         <!-- offset from bow-->
        <sail-bearing-norm type="double">0.0</sail-bearing-norm>       <!-- sail-bearing divided by max trim to give -1.0 to +1.0 value -->
        <sail-bearing-hdg-deg type="double">0.0</sail-bearing-hdg-deg> <!-- adjusted by ship heading-->
@@ -517,16 +468,9 @@ setlistener("/sim/signals/fdm-initialized", func {
   <beta-deg alias="/fdm/jsbsim/aero/hull-beta-deg"/>
  </orientation>
 
-<!-- GOKSTAD FCS PROPERTIES-->
  <fdm>
   <jsbsim>
    <fcs>
-    <!-- sail-brace-speed-cmd-norm alias="/controls/flight/aileron" / -->
-    <!-- sail-brace-speed-cmd-norm alias="/surface-positions/sails/sail[1]/sail-bearing-norm" / -->
-    <!-- sail-reef-cmd-norm alias="/controls/engines/engine[1]/throttle" / -->
-    <!-- sail-reef-cmd-norm alias="/surface-positions/sails/sail[1]/sail-reef-norm" / -->
-    <!-- sail-brace-pos-deg alias="/surface-positions/sails/sail[1]/sail-bearing-deg" / -->
-    <!-- sail-reef-pos-norm alias="/surface-positions/sails/sail[1]/sail-reef-norm" / -->
    </fcs>
   </jsbsim>
  </fdm>
