@@ -544,7 +544,7 @@
   <offsets>
     <x-m> 15.0 </x-m>
     <y-m> 0.00 </y-m>
-    <z-m> 0.20 </z-m>
+    <z-m> 0.05 </z-m>
   </offsets>
   <overlay>
    <particlesystem>

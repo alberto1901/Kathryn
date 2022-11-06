@@ -76,10 +76,6 @@
     <x>  5.25 </x>
     <y>  0.00 </y>
     <z>  7.29 </z>
- <!--Center of mass old=6.64/0/6.00-->
-    <!-- x> 6.64 </x -->
-    <!-- y> 0.00 </y -->
-    <!-- z> 6.00 </z -->
 
   </location>
   <location name="EYEPOINT" unit="M">
@@ -87,6 +83,7 @@
     <y>  2.50 </y>
     <z>  0.00 </z>
   </location>
+
    <location name="VRP" unit="M">
     <x> 0.00 </x>
     <y> 0.00 </y>
@@ -139,11 +136,7 @@
    <x> 7.94 </x>
    <y> 0.00 </y>
    <z> 0.37 </z>
-    <!-- old COG -->
-   <!-- x> 7.32 </x -->
-   <!-- y> 0.0 </y -->
-   <!-- z> 0.5  </z -->
- </location>
+  </location>
 
   <documentation>Adjustable payload pointmasses.</documentation>
   <!-- Cargo weights. -->
@@ -172,6 +165,8 @@
  </mass_balance>
 
  <ground_reactions>
+  <documentation>Used to determine grounded status</documentation>
+
   <contact type="STRUCTURE" name="BOW">
    <location unit="M">
     <x>   0.00 </x>
@@ -224,7 +219,6 @@
     <z> 0.0 </z>
    </direction>
   </force>
-
   <force name="hydro-Y" frame="LOCAL" unit="LBS">
    <location unit="M">
      <x>  7.94 </x>
@@ -240,7 +234,6 @@
     <z> 0.0 </z>
    </direction>
   </force>
-
   <force name="hydro-Z" frame="LOCAL" unit="LBS">
    <location unit="M">
      <x>  7.94 </x>
@@ -402,12 +395,7 @@
  <system file="hydrodynamic-planing">
   <!-- Parameters defining the planing surfaces of the hull. -->
   <!-- NOTE: Coordinates in the hydro RP frame. -->
-<!--
-  <property value="59.88">hydro/planing/forebody-length-ft</property>
-  <property value="9.84">hydro/planing/forebody-beam-ft</property>
-  <property value="-5.58">hydro/planing/forebody-keel-z-ft</property>
-  <property value="29.95">hydro/planing/forebody-end-x-ft</property>
--->
+
   <property value="0.0">hydro/planing/forebody-length-ft</property>
   <property value="0.0">hydro/planing/forebody-beam-ft</property>
   <property value="0.0">hydro/planing/forebody-keel-z-ft</property>
@@ -443,6 +431,7 @@
   <channel name="sailing">
 
       <summer name="sailing-thrust">
+      <documentation> Necessity of max probably indicates that thrust forces are not accurate as they can produce excessive speeds</documentation>
         <input>aero/force/D_sail-0-lbs</input>
         <input>aero/force/D_sail-1-lbs</input>
         <clipto>

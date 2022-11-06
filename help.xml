@@ -44,11 +44,19 @@
 <!-- RUDDER -->
  <key>
   <name>[RIGHT ARROW]</name>
-  <desc>Rudder to starboard</desc>
+  <desc>Rudder to starboard 1%</desc>
+ </key>
+ <key>
+  <name>[ALT][RIGHT ARROW]</name>
+  <desc>Rudder to starboard 10%</desc>
  </key>
  <key>
   <name>[LEFT ARROW] </name>
-  <desc>Rudder to port</desc>
+  <desc>Rudder to port 1%</desc>
+ </key>
+ <key>
+  <name>[ALT][LEFT ARROW] </name>
+  <desc>Rudder to port 10%</desc>
  </key>
 
 <!-- ANCHOR HANDLING -->

@@ -5,9 +5,10 @@ var title = "Instruments";
     #rgb values for panel, last value is maximum alpha for panel
     var rgb = [0.45, 0.63, 0.79, 0.80];
 
-    ## create a new window, dimensions are WIDTH x HEIGHT, using the dialog decoration (i.e. titlebar)
-    var window = canvas.Window.new([258,1200], nil)
-       .set('title',title);
+    ## create a new window, dimensions are WIDTH x HEIGHT, using the dialog decoration (i.e. titlebar) allowfocus: 0
+    var window = canvas.Window.new(size:[258,1200], type:nil)
+       .set('title',title)
+       .clearFocus();
 
     #hide the panel window and set the showing flag to indicate it is not showing
     window.hide();
@@ -47,14 +48,6 @@ var title = "Instruments";
         .setCenter(128,128);
 
 
-
-   #create an image for the course indicator compass
-#    var true_course_compass = root.createChild("image")
-#        .setFile( "Aircraft/Kathryn/Instruments/compass.png" )
-#        .setScale(0.60)
-#        .setCenter(128,128)
-#        .setTranslation(52.5,50);
-
    #create an image for the course indicator
     var true_course_indicator = root.createChild("image")
         .setFile( "Aircraft/Kathryn/Instruments/course_indicator.png" )
@@ -89,6 +82,14 @@ var title = "Instruments";
         .setScale(0.8)
         .setTranslation(108,270);
 
+     var sail_jib_boom_indicator = root.createChild("text")
+      .setText("|")
+      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+      .setFontSize(50)             # font size (in texels) and font aspect ratio
+      .setColor(0,0,0,0.2)         # black, 20% opaque
+      .setAlignment("center-top")  # how the text is aligned to where you place it
+      .setTranslation(126, 270);   # where to place the text
+
      var sail_jib_indicator = root.createChild("text")
       .setText("|")
       .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
@@ -97,6 +98,15 @@ var title = "Instruments";
       .setAlignment("center-top")  # how the text is aligned to where you place it
       .setTranslation(126, 270);   # where to place the text
 
+
+     var sail_main_boom_indicator = root.createChild("text")
+      .setText("|")
+      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+      .setFontSize(50)             # font size (in texels) and font aspect ratio
+      .setColor(0,0,0,0.2)         # black, 20% opaque
+      .setAlignment("center-top")  # how the text is aligned to where you place it
+      .setTranslation(126, 330);   # where to place the text
+
      var sail_main_indicator = root.createChild("text")
       .setText("|")
       .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
@@ -104,6 +114,7 @@ var title = "Instruments";
       .setColor(1,1,1,0.5)         # white, 50% opaque
       .setAlignment("center-top")  # how the text is aligned to where you place it
       .setTranslation(126, 330);   # where to place the text
+
 
 
 
@@ -198,6 +209,14 @@ var title = "Instruments";
       .setAlignment("center-center") # how the text is aligned to where you place it
       .setTranslation(128, 550);     # where to place the text
 
+     var rudder_value = root.createChild("text")
+      .setText("")
+      .set("font", "LiberationFonts/LiberationSans-Bold.ttf")
+      .setFontSize(15, 0.9)          # font size (in texels) and font aspect ratio
+      .setColor(0,0,1,0.5)           # black, fully opaque
+      .setAlignment("center-center") # how the text is aligned to where you place it
+      .setTranslation(128, 575);     # where to place the text
+
 
 
      #show heel angle
@@ -223,7 +242,7 @@ var title = "Instruments";
       .setFontSize(15, 0.9)          # font size (in texels) and font aspect ratio
       .setColor(0,0,1,0.5)           # black, fully opaque
       .setAlignment("center-center") # how the text is aligned to where you place it
-      .setTranslation(128, 680);     # where to place the text
+      .setTranslation(128, 670);     # where to place the text
 
 
      #show pitch angle
@@ -301,6 +320,7 @@ var title = "Instruments";
     print("Making and starting the fade timer");
     var fade_in_timer = maketimer(0.01, func panel_fade(0.03) );
     var fade_out_timer = maketimer(0.01, func panel_fade(-0.03) );
+
 
 
 
@@ -384,22 +404,9 @@ var update = func(){
     #update wave data
     wave_data.setText(sprintf("Wave\n%.0f : ", wave));
 
-    #update true course_data indicator/data
-#    var east_deg_sec = getprop("/fdm/jsbsim/velocities/vrp-v-east-deg_sec");
-#    var north_deg_sec = getprop("/fdm/jsbsim/velocities/vrp-v-north-deg_sec");
-#    var true_course_deg1 = math.atan2(east_deg_sec, north_deg_sec) * R2D;
-
-#    var east_deg_sec = getprop("/fdm/jsbsim/velocities/u-fps");
-#    var north_deg_sec = getprop("/fdm/jsbsim/velocities/v-fps");
-#    var true_course_deg1 = math.atan2(east_deg_sec, north_deg_sec);
-
-#    var true_course_deg_mag = getprop("/orientation/track-magnetic-deg");
-
     var true_course_deg = getprop("/orientation/track-deg");
     #rotate true course pointer on compass
     true_course_indicator.setRotation(true_course_deg * D2R);
-#    if(true_course_deg < 0)
-#      {true_course_deg = 360 + true_course_deg;}
     #update true course data display
     true_course_data.setText(sprintf("Deg\n%.2f", true_course_deg));
 
@@ -410,6 +417,11 @@ var update = func(){
     sail_jib_indicator.setScale(sail_jib_reef);
 #    print("sail-jib-reef: " ~ getprop("/surface-positions/sails/sail[0]/sail-jib-reef"));
 
+
+    #update jib boom angle indicator
+    var sail_jib_boom_angle = getprop("/surface-positions/sails/sail[0]/sail-bearing-deg");
+    sail_jib_boom_indicator.setRotation((-1 * sail_jib_boom_angle) * D2R);
+
     #update jib angle indicator
     var sail_jib_angle = getprop("/surface-positions/sails/sail[0]/sail-bearing-deg");
     sail_jib_indicator.setRotation((-1 * sail_jib_angle) * D2R);
@@ -419,6 +431,10 @@ var update = func(){
     var sail_main_reef = getprop("/surface-positions/sails/sail[1]/sail-reef-norm");
     sail_main_indicator.setScale(sail_main_reef);
 #    print("sail-main-reef: " ~ getprop("/surface-positions/sails/sail[1]/sail-main-reef"));
+
+    #update main boom angle indicator
+    var sail_main_boom_angle = getprop("/surface-positions/sails/sail[1]/sail-bearing-deg");
+    sail_main_boom_indicator.setRotation((-1 * sail_main_boom_angle) * D2R);
 
     #update main angle indicator
     var sail_main_angle = getprop("/surface-positions/sails/sail[1]/sail-bearing-deg");
@@ -456,6 +472,7 @@ var update = func(){
     var rudder_setting = 128 + 128 * -getprop("/fdm/jsbsim/fcs/rudder-cmd-norm");
     rudder_indicator.setText("|");
     rudder_indicator.setTranslation(rudder_setting, 550);
+    rudder_value.setText(sprintf("%.1f", 30 * getprop("/fdm/jsbsim/fcs/rudder-pos-norm")));
 
     #update heel indicator
     var heel_setting = getprop("/fdm/jsbsim/hydro/hull/roll-deg");

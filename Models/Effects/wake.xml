@@ -39,7 +39,7 @@
    <!-- phi-min-deg>90.0</phi-min-deg>
    <phi-max-deg>90.0</phi-max-deg -->
    <speed-mps>
-    <value>5.0</value>
+    <value>2.0</value>
     <spread>0.50</spread>
    </speed-mps>
    <rotation-speed>

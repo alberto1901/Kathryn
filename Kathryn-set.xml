@@ -187,8 +187,15 @@
       <binding>
         <command>property-adjust</command>
         <property>/controls/flight/rudder</property>
-        <step type="double">-0.02</step>
+        <step type="double">-0.01</step>
       </binding>
+      <mod-alt>
+      <binding>
+        <command>property-adjust</command>
+        <property>/controls/flight/rudder</property>
+        <step type="double">-0.10</step>
+      </binding>
+      </mod-alt>
     </key>
 
     <key n="358">
@@ -198,8 +205,15 @@
       <binding>
         <command>property-adjust</command>
         <property>/controls/flight/rudder</property>
-        <step type="double">0.02</step>
+        <step type="double">0.01</step>
       </binding>
+      <mod-alt>
+      <binding>
+        <command>property-adjust</command>
+        <property>/controls/flight/rudder</property>
+        <step type="double">0.10</step>
+      </binding>
+      </mod-alt>
     </key>
 
     <key n="359">
