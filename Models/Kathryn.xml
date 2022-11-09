@@ -30,58 +30,66 @@
 <effect>
   <name>Effects/reflection</name>
   <inherits-from>Aircraft/Generic/Effects/Fuselagereflect</inherits-from>
-<object-name>aft_stay_winder</object-name>
-<object-name>bow_cap_hull_sides</object-name>
-<object-name>bow_cap_wood_white</object-name>
-<object-name>bow_head_rail_upper_sep37_wood_white</object-name>
-<object-name>bow_head_rail_upper_sep38_wood_white</object-name>
-<object-name>bow_name_board_wood_white</object-name>
-<object-name>bow_sprit_plank_wood_white</object-name>
-<object-name>bow_sprit_wood</object-name>
-<object-name>bumper_wood</object-name>
-<!--object-name>cabin_glass</object-name-->
-<!--object-name>cabin_hull_sides</object-name-->
-<!--object-name>cabin_window_front_glass</object-name-->
-<!--object-name>cabin_wood_white</object-name-->
-<object-name>deck_fore_hull_sides</object-name>
-<object-name>deck_fore_wood_white</object-name>
-<object-name>doghouse_roof_hull_sides</object-name>
-<object-name>forestay_winder</object-name>
-<object-name>hatch_aft_hull_sides</object-name>
-<object-name>hatch_aft_wood_white</object-name>
-<object-name>hatch_fore_hull_sides</object-name>
-<object-name>hatch_fore_wood</object-name>
-<object-name>hatch_fore_wood_white</object-name>
-<object-name>hatch_main_hull_sides</object-name>
-<object-name>hatch_main_wood_white</object-name>
-<object-name>helm_hull_sides</object-name>
-<object-name>helm_wood</object-name>
-<object-name>helm_wood_white</object-name>
-<object-name>hull_deck</object-name>
-<object-name>hull_hull_bottom</object-name>
-<object-name>hull_hull_sides</object-name>
-<object-name>hull_wood_white</object-name>
-<object-name>jib_boom_wood</object-name>
-<object-name>jib_stay_winder</object-name>
-<object-name>main_back_stays_winder</object-name>
-<object-name>mast_winder</object-name>
-<object-name>mast_wood</object-name>
-<object-name>pennant_hull_bottom</object-name>
-<object-name>railing_aft_lower_wood_white</object-name>
-<object-name>railing_fore_port_wood_white</object-name>
-<object-name>rudder_hull_bottom</object-name>
-<object-name>sail_jib_furled_sails</object-name>
-<object-name>sail_jib_sails</object-name>
-<object-name>sail_main_boom_wood</object-name>
-<object-name>sail_main_furled_sails</object-name>
-<object-name>sail_main_furled_wood</object-name>
-<object-name>sail_main_rings_wood</object-name>
-<!--object-name>sail_main_sails</object-name-->
-<object-name>sampson_post_wood_white</object-name>
-<object-name>wheel_wheel_wood</object-name>
-<object-name>winder_engine_housing_hull_sides</object-name>
-<object-name>winder_engine_housing_wood_white</object-name>
-<object-name>winder_winder</object-name>
+    <!-- object-name>cabin_window_front_glass</object-name -->
+    <!-- object-name>cabin_glass</object-name -->
+    <object-name>rail_fore_wood_white</object-name>
+    <object-name>rail_fore_pins_wood_white</object-name>
+    <object-name>rail_aft_lower_wood_white</object-name>
+    <object-name>rail_aft_top_wood_white</object-name>
+    <object-name>rail_aft_pins_wood_white</object-name>
+    <object-name>sail_jib_port_sails</object-name>
+    <object-name>sail_main_port_sails</object-name>
+    <object-name>name_sign_name_board</object-name>
+    <object-name>eagle_name_board</object-name>
+    <object-name>cabin_interior_winder</object-name>
+    <object-name>sail_jib_stbd_sails</object-name>
+    <object-name>sail_main_stbd_sails</object-name>
+    <object-name>sail_jib_furled_sails</object-name>
+    <object-name>sail_main_furled_sails</object-name>
+    <object-name>sail_main_furled_wood</object-name>
+    <object-name>bow_head_rail_upper_sep38_wood_white</object-name>
+    <object-name>bow_head_rail_upper_sep37_wood_white</object-name>
+    <object-name>pennant_hull_bottom</object-name>
+    <object-name>doghouse_roof_hull_sides</object-name>
+    <object-name>aft_stay_winder</object-name>
+    <object-name>winder_winder</object-name>
+    <object-name>wheel_wheel_wood</object-name>
+    <object-name>sail_main_rings_wood</object-name>
+    <object-name>jib_stay_winder</object-name>
+    <object-name>main_back_stays_winder</object-name>
+    <object-name>forestay_winder</object-name>
+    <object-name>hull_deck</object-name>
+    <object-name>hull_hull_bottom</object-name>
+    <object-name>hull_hull_sides</object-name>
+    <object-name>hull_wood_white</object-name>
+    <object-name>bumper_wood</object-name>
+    <object-name>bow_cap_hull_sides</object-name>
+    <object-name>bow_cap_wood_white</object-name>
+    <object-name>bow_sprit_plank_wood_white</object-name>
+    <object-name>winder_engine_housing_hull_sides</object-name>
+    <object-name>winder_engine_housing_wood_white</object-name>
+    <object-name>cabin_hull_sides</object-name>
+    <object-name>cabin_wood_white</object-name>
+    <object-name>hatch_fore_hull_sides</object-name>
+    <object-name>hatch_fore_wood</object-name>
+    <object-name>hatch_fore_wood_white</object-name>
+    <object-name>hatch_aft_hull_sides</object-name>
+    <object-name>hatch_aft_wood_white</object-name>
+    <object-name>hatch_main_hull_sides</object-name>
+    <object-name>hatch_main_wood_white</object-name>
+    <object-name>deck_fore_hull_sides</object-name>
+    <object-name>deck_fore_wood_white</object-name>
+    <object-name>sampson_post_wood_white</object-name>
+    <object-name>helm_hull_sides</object-name>
+    <object-name>helm_wood</object-name>
+    <object-name>helm_wood_white</object-name>
+    <object-name>rudder_hull_bottom</object-name>
+    <object-name>bow_name_board_name_board</object-name>
+    <object-name>bow_sprit_wood</object-name>
+    <object-name>mast_winder</object-name>
+    <object-name>mast_wood</object-name>
+    <object-name>jib_boom_wood</object-name>
+    <object-name>sail_main_boom_wood</object-name>
 </effect>
 
 
@@ -367,9 +375,9 @@
   </expression>
   <object-name>pennant_hull_bottom</object-name>
   <center>
-   <x-m> 6.057688 </x-m>
-   <y-m> 0.049165 </y-m>
-   <z-m> 18.282824 </z-m>
+   <x-m> 6.084096 </x-m>
+   <y-m> -0.013633 </y-m>
+   <z-m> 18.168917 </z-m>
   </center>
   <axis>
    <x> 0.0 </x>
@@ -379,37 +387,59 @@
  </animation>
 
 
+ <!-- scale length randomly -->
+<animation>
+  <type>scale</type>
+  <object-name>pennant_hull_bottom</object-name>
+    <property>/sim/model/binocular_pitch</property>
+    <interpolation>
+      <entry><ind> 0</ind><dep> 1.15</dep></entry>
+      <entry><ind> 13 </ind><dep> 0.60</dep></entry>
+      <entry><ind> 15 </ind><dep> 0.75</dep></entry>
+      <entry><ind> 30 </ind><dep> 1.10</dep></entry>
+      <entry><ind> 45 </ind><dep> 0.65</dep></entry>
+      <entry><ind> 52 </ind><dep> 1.10</dep></entry>
+      <entry><ind> 60</ind><dep> 0.85</dep></entry>
+    </interpolation>
+    <interpolation>
+      <entry><ind>  0.0 </ind><dep>  1.0 </dep></entry>
+      <entry><ind> 23.3 </ind><dep>  0.75 </dep></entry>
+      <entry><ind> 54.0 </ind><dep> 0.90</dep></entry>
+      <entry><ind>100.0 </ind><dep>  1.05 </dep></entry>
+    </interpolation>
+  <center>
+   <x-m> 6.084096 </x-m>
+   <y-m> -0.013633 </y-m>
+   <z-m> 18.168917 </z-m>
+  </center>
+  <axis>
+   <x> 1.0 </x>
+   <y> 0.0 </y>
+   <z> 0.0 </z>
+  </axis>
+</animation>
+
+
+
  <!-- lift and drop dependent on wind speed -->
   <animation>
   <type>rotate</type>
   <object-name>pennant_hull_bottom</object-name>
-  <property>/sim/model/binocular_pitch</property>
+  <sum>
+    <property>/environment/wind-speed-kt</property>
+    <property>/sim/model/binocular_pitch</property>
+  </sum>
   <interpolation>
-     <entry>
-       <ind> 0.0</ind>
-       <dep> -10.0</dep>
-     </entry>
-       <entry>
-         <ind> 15 </ind>
-         <dep> -25</dep>
-       </entry>
-      <entry>
-        <ind>30</ind>
-        <dep>0.0</dep>
-      </entry>
-       <entry>
-         <ind> 45 </ind>
-         <dep> 25</dep>
-       </entry>
-       <entry>
-         <ind> 60</ind>
-         <dep> 15.0</dep>
-       </entry>
+     <entry><ind> 25 </ind><dep> -45 </dep></entry>
+     <entry><ind> 60 </ind><dep> -25 </dep></entry>
+     <entry><ind> 70 </ind><dep> -10 </dep></entry>
+     <entry><ind> 80 </ind><dep>  15 </dep></entry>
+     <entry><ind> 90 </ind><dep>  10 </dep></entry>
   </interpolation>
   <center>
-   <x-m> 6.057688 </x-m>
-   <y-m> 0.049165 </y-m>
-   <z-m> 18.282824 </z-m>
+   <x-m> 6.084096 </x-m>
+   <y-m> -0.013633 </y-m>
+   <z-m> 18.168917 </z-m>
   </center>
   <axis>
    <x> 0.0 </x>
@@ -426,46 +456,24 @@
     <property>/sim/model/binocular_pitch</property>
   <!-- /sum -->
     <interpolation>
-      <entry>
-        <ind> 0</ind>
-        <dep> 15.0</dep>
-      </entry>
-       <entry>
-         <ind> 13 </ind>
-         <dep> -20</dep>
-       </entry>
-       <entry>
-         <ind> 15 </ind>
-         <dep> 25</dep>
-       </entry>
-       <entry>
-         <ind> 30 </ind>
-         <dep> 20</dep>
-       </entry>
-       <entry>
-         <ind> 45 </ind>
-         <dep> -25</dep>
-       </entry>
-       <entry>
-         <ind> 52 </ind>
-         <dep> 20</dep>
-       </entry>
-       <entry>
-         <ind> 60</ind>
-         <dep> -15.0</dep>
-       </entry>
+      <entry><ind> 0  </ind><dep> 15.0</dep></entry>
+      <entry><ind> 13 </ind><dep> -20 </dep></entry>
+      <entry><ind> 22 </ind><dep> 25  </dep></entry>
+      <entry><ind> 30 </ind><dep> 20  </dep></entry>
+      <entry><ind> 45 </ind><dep> -25 </dep></entry>
+      <entry><ind> 52 </ind><dep> 20  </dep></entry>
+      <entry><ind> 60 </ind><dep> -15.0</dep></entry>
     </interpolation>
-<interpolation>
-         <entry><ind>  0.0 </ind><dep>  0.0 </dep></entry>
-         <entry><ind> 23.3 </ind><dep>  6.0 </dep></entry>
-         <entry><ind> 54.0 </ind><dep> 19.5 </dep></entry>
-         <entry><ind>100.0 </ind><dep>  0.0 </dep></entry>
-      </interpolation>
-
+    <interpolation>
+      <entry><ind>  0.0 </ind><dep>  0.0 </dep></entry>
+      <entry><ind> 23.3 </ind><dep>  -13 </dep></entry>
+      <entry><ind> 54.0 </ind><dep> 19.5 </dep></entry>
+      <entry><ind>100.0 </ind><dep>  0.0 </dep></entry>
+    </interpolation>
   <center>
-   <x-m> 6.057688 </x-m>
-   <y-m> 0.049165 </y-m>
-   <z-m> 18.282824 </z-m>
+   <x-m> 6.084096 </x-m>
+   <y-m> -0.013633 </y-m>
+   <z-m> 18.168917 </z-m>
   </center>
   <axis>
    <x> 1.0 </x>

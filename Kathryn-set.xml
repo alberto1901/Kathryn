@@ -425,6 +425,7 @@
      <rudder-cof-z>-0.701324</rudder-cof-z>                        <!-- Wings3d xyz -->
      <!-- keels provide heeling counter-balance, lateral resistance/drag and forward thrust/lift -->
      <full-keel-sqft type="double">75.622</full-keel-sqft> <!--both sides --> <!-- Wings3d area -->
+
      <center-board-sqft type="double">59.64</center-board-sqft> <!--both sides --> <!-- Wings3d area -->
      <center-board-drop-norm type="double">1.0</center-board-drop-norm> <!-- 0.0 - 1.0 percentage of centboard dropped -->
      <center-board-cof-x type="double">5.511927</center-board-cof-x>    <!-- Wings3d xyz -->
@@ -433,7 +434,7 @@
    </hull>
 
    <sails>
-     <!-- sails provide thrust/lift and heeling moment -->
+     <!-- sails provide thrust/lift, yaw and heeling moments -->
      <number-of-sails>2</number-of-sails>
 
      <sail>       <!-- JIB SAIL = surface-positions/sails/sail[0]/ -->
