@@ -55,8 +55,8 @@
 
   <!-- Views -->
   <view n="0">
-   <!-- Pilot's position. -->
-   <name>Pilot View</name>
+   <!-- Captain's position. -->
+   <name>Captain View</name>
    <internal>true</internal>
    <config>
     <x-offset-m type="double">  0.500 </x-offset-m>
@@ -97,6 +97,23 @@
      <target-z-offset-m> 7.0 </target-z-offset-m>
    </config>
   </view>
+
+<view n="103">
+   <name>Walk View</name>
+   <internal>true</internal>
+   <config>
+    <!-- x/y/z == right/up/back -->
+    <from-model type="bool">true</from-model>
+    <from-model-idx type="int">0</from-model-idx>
+    <x-offset-m type="double">  0.500 </x-offset-m>
+    <y-offset-m type="double">  3.20 </y-offset-m>
+    <z-offset-m type="double"> 14.20 </z-offset-m>
+    <heading-offset-deg type="double"> 0.0 </heading-offset-deg>
+    <pitch-offset-deg type="double"> 0.0 </pitch-offset-deg>
+    <default-field-of-view-deg type="double"> 65 </default-field-of-view-deg>
+   </config>
+  </view>
+
 
   <chase-distance-m type="double">-30.0</chase-distance-m>
 
@@ -152,6 +169,8 @@
 
  <nasal>
 
+
+
   <Kathryn>
    <file>Aircraft/Kathryn/Systems/Kathryn.nas</file>
   </Kathryn>
@@ -172,12 +191,18 @@
     <file>Aircraft/Kathryn/Nasal/panel.nas</file>
   </panel>
 
+  <walkview>
+   <file>Aircraft/Generic/WalkView/walkview.nas</file>
+   <file>Aircraft/Kathryn/Systems/walk-views.nas</file>
+  </walkview>
+
  </nasal>
 
 
 <!-- KEYBOARD BINDINGS -->
  <input>
-  <keyboard>
+  <!-- keyboard --><!-- Load the default keyboard bindings for the walk view (w/W, a, d, s). -->
+  <keyboard include="Aircraft/Generic/WalkView/walk-view-keys.xml">
 
 <!-- RUDDER CONTROL -->
     <key n="356">
