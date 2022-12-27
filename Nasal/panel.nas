@@ -472,7 +472,7 @@ var update = func(){
     var rudder_setting = 128 + 128 * -getprop("/fdm/jsbsim/fcs/rudder-cmd-norm");
     rudder_indicator.setText("|");
     rudder_indicator.setTranslation(rudder_setting, 550);
-    rudder_value.setText(sprintf("%.1f", 30 * getprop("/fdm/jsbsim/fcs/rudder-pos-norm")));
+    rudder_value.setText(sprintf("%.3f", 30 * getprop("/fdm/jsbsim/fcs/rudder-pos-norm")));
 
     #update heel indicator
     var heel_setting = getprop("/fdm/jsbsim/hydro/hull/roll-deg");
