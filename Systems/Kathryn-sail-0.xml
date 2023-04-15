@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+<system name="Sail-0">
+<!-- <axis name="DRAG">
+    aero/qbar-psf     pound per sq foot pressure of wind
+  *  sail-sqft        square footage of sail
+  *  sail-reef-norm   reefing factor of sail (0.0 to 1.0)
+  *  sail-beta-deg    sail facing / wind deg difference
+  *  sail-bearing-hdg-deg not used
+-->
+
+  <function name="aero/moment/yaw_sail-0-lbsft">
+    <description>Yaw moment due to sail 0. Since sail is in front of COG, moment should always face the boat away from the wind.</description>
+    <product>
+     <property>aero/qbar-psf</property> <!--wind pressure -->
+     <property>/surface-positions/sails/sail[0]/sail-sqft</property> <!-- square footage of sail -->
+     <property>/surface-positions/sails/sail[0]/sail-reef-norm</property> <!-- percentage of square footage exposed to wind -->
+     <property>/surface-positions/sails/sail[0]/sail-cof-x</property> <!-- distance from COG -->
+     <property>/surface-positions/sails/sail[0]/sail-set-norm</property> <!-- to port or stbd? -->
+     <table> <!-- angle of sail to wind -->
+      <independentVar lookup="row">/surface-positions/sails/sail[0]/sail-beta-deg</independentVar>
+      <tableData>
+        0   0.00
+       32   0.00
+       39   1.00
+       45   1.50
+       90   2.50
+       135  1.50
+       180  0.00
+     </tableData>
+    </table>
+    </product>
+  </function>
+
+
+<!-- HEEL -->
+  <function name="aero/moment/heel_sail-0-lbsft">
+    <description>Heel moment due to sail 0.</description>
+    <product>
+     <property>aero/qbar-psf</property> <!--wind pressure -->
+     <property>/surface-positions/sails/sail[0]/sail-sqft</property> <!-- square footage of sail -->
+     <property>/surface-positions/sails/sail[0]/sail-reef-norm</property> <!-- percentage of square footage exposed to wind -->
+     <property>/surface-positions/sails/sail[0]/sail-cof-z</property> <!-- distance from COG -->
+     <property>/surface-positions/sails/sail[1]/sail-set-norm</property> <!-- -1 for port, 1 for stbd -->
+     <table> <!-- angle of sail to wind -->
+      <independentVar lookup="row">/surface-positions/sails/sail[0]/sail-beta-deg</independentVar>
+      <tableData>
+        0   0.0
+        45 -0.5
+        90 -1.0
+       135 -0.5
+       180  0.0
+       225  0.5
+       270  1.0
+       315  0.5
+       360  0.0
+     </tableData>
+    </table>
+    </product>
+  </function>
+
+<!--THRUST -->
+   <function name="aero/force/D_sail-0-lbs">
+    <description>Drag force due to sail 0</description>
+    <product>
+     <property>aero/qbar-psf</property> <!--wind pressure -->
+     <property>/surface-positions/sails/sail[0]/sail-sqft</property> <!-- square footage of sail -->
+     <property>/surface-positions/sails/sail[0]/sail-reef-norm</property> <!-- percentage of square footage exposed to wind -->
+     <table>
+      <independentVar lookup="row">/surface-positions/sails/sail[0]/sail-beta-deg</independentVar> <!-- angle of sail to wind -->
+<tableData>
+0    0.08
+23   0.16
+45   0.65
+68   0.50
+90   0.50
+112  0.45
+135  0.40
+157  0.25
+161  0.06
+164  0.00
+180  0.00
+</tableData>
+
+      <!--tableData>
+        0   0.00
+       32   1.00
+       39   2.00
+       45   3.00
+       90   4.00
+       135  6.00
+       180  0.00
+       225  6.00
+       270  4.00
+       315  3.00
+       321  2.00
+       328  1.00
+       360  0.00
+      </tableData -->
+
+      <!-- SQUARE SAIL -->
+      <!--tableData>
+           5.0  0.0
+          20.0  0.5
+          30.0  1.0
+          90.0  1.0
+         150.0  1.0
+         160.0  0.5
+         175.0  0.0
+      </tableData-->
+     </table>
+    </product>
+   </function>
+
+
+ </system>

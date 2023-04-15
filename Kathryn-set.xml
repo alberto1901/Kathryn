@@ -1,0 +1,540 @@
+<?xml version="1.0"?>
+<!--
+  The Skipjack Kathryn for FlightGear.
+  Copyright (C) 2022  Jeffery S. Koppe  (jeff.koppe(at)gmail.com)
+  This file is licensed under the GPL license version 2 or later.
+
+  Modified from The Gokstad ship for FlightGear.
+  Copyright (C) 2013 - 2018  Anders Gidenstam  (anders(at)gidenstam.org)
+
+-->
+<PropertyList>
+
+ <sim>
+
+  <description>Kathryn</description>
+  <author>Jeffery S. Koppe</author>
+  <aircraft-version>2022-06-21</aircraft-version>
+
+  <long-description>Kathryn is one of the last remaining working Skipjacks. The Skipjack is a distincty American ship type developed in the late 19th century specifically for collecting oysters from the shallow waters of the Chesapeake Bay.
+  </long-description>
+
+  <tags>
+   <tag>seacraft</tag>
+  </tags>
+
+  <status type="string">alpha</status>
+
+  <rating>
+   <FDM type="int">1</FDM>
+   <systems type="int">1</systems>
+   <cockpit type="int">0</cockpit>
+   <model type="int">1</model>
+  </rating>
+
+  <flight-model>jsb</flight-model>
+  <aero>Kathryn</aero>
+  <!-- The higher rate seems to aide stability. -->
+  <model-hz type="double">480.0</model-hz>
+
+  <presets>
+   <onground type="bool">true</onground>
+  </presets>
+
+  <startup>
+   <splash-texture>Aircraft/Kathryn/splash.png</splash-texture>
+  </startup>
+
+  <!-- 3d model -->
+  <model>
+   <path>Aircraft/Kathryn/Models/Kathryn.xml</path>
+   <livery>
+    <file type="string"></file>
+   </livery>
+  </model>
+
+  <!-- Views -->
+  <view n="0">
+   <!-- Captain's position. -->
+   <name>Captain View</name>
+   <internal>true</internal>
+   <config>
+    <x-offset-m type="double">  0.500 </x-offset-m>
+    <y-offset-m type="double">  3.20 </y-offset-m>
+    <z-offset-m type="double"> 14.20 </z-offset-m>
+    <pitch-offset-deg type="double"> 0.0 </pitch-offset-deg>
+   </config>
+  </view>
+
+  <!-- Move the center of the external views. -->
+  <view n="1">
+   <config>
+    <target-y-offset-m> 4.0 </target-y-offset-m>
+    <target-z-offset-m> 7.0 </target-z-offset-m>
+   </config>
+  </view>
+  <view n="2">
+   <config>
+     <target-y-offset-m> 4.0 </target-y-offset-m>
+     <target-z-offset-m> 7.0 </target-z-offset-m>
+   </config>
+  </view>
+  <view n="3">
+   <config>
+     <target-y-offset-m> 4.0 </target-y-offset-m>
+     <target-z-offset-m> 7.0 </target-z-offset-m>
+   </config>
+  </view>
+  <view n="5">
+   <config>
+     <target-y-offset-m> 4.0 </target-y-offset-m>
+     <target-z-offset-m> 7.0 </target-z-offset-m>
+   </config>
+  </view>
+  <view n="6">
+   <config>
+     <target-y-offset-m> 4.0 </target-y-offset-m>
+     <target-z-offset-m> 7.0 </target-z-offset-m>
+   </config>
+  </view>
+
+<view n="103">
+   <name>Walk View</name>
+   <internal>true</internal>
+   <config>
+    <!-- x/y/z == right/up/back -->
+    <from-model type="bool">true</from-model>
+    <from-model-idx type="int">0</from-model-idx>
+    <x-offset-m type="double">  0.500 </x-offset-m>
+    <y-offset-m type="double">  3.20 </y-offset-m>
+    <z-offset-m type="double"> 14.20 </z-offset-m>
+    <heading-offset-deg type="double"> 0.0 </heading-offset-deg>
+    <pitch-offset-deg type="double"> 0.0 </pitch-offset-deg>
+    <default-field-of-view-deg type="double"> 65 </default-field-of-view-deg>
+   </config>
+  </view>
+
+
+  <chase-distance-m type="double">-30.0</chase-distance-m>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/Kathryn/Sounds/sounds.xml</path>
+  </sound>
+
+  <!-- Aircraft specific help. -->
+  <help include="help.xml"/>
+
+  <max-simtime-per-frame n="0" type="double">0.1</max-simtime-per-frame>
+
+  <menubar>
+   <default>
+    <menu n="100">
+     <label>Kathryn</label>
+     <item>
+      <label>About</label>
+      <binding>
+       <command>nasal</command>
+       <script>Kathryn.about()</script>
+      </binding>
+     </item>
+     <item>
+      <label>Select Livery</label>
+      <binding>
+       <command>nasal</command>
+       <script>aircraft.livery.dialog.toggle()</script>
+      </binding>
+    </item>
+    </menu>
+   </default>
+  </menubar>
+
+ </sim>
+
+
+ <payload>
+  <weight>
+   <name type="string">Forward cargo hold</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">7500.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Aft cargo hold</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">8000.0</max-lb>
+  </weight>
+ </payload>
+
+ <nasal>
+
+
+
+  <Kathryn>
+   <file>Aircraft/Kathryn/Systems/Kathryn.nas</file>
+  </Kathryn>
+
+  <aground>
+    <file>Aircraft/Kathryn/Nasal/aground.nas</file>
+  </aground>
+
+  <sail_handling>
+    <file>Aircraft/Kathryn/Nasal/sail_handling.nas</file>
+  </sail_handling>
+
+  <erik>
+    <file>Aircraft/Kathryn/Nasal/erik.nas</file>
+  </erik>
+
+  <panel>
+    <file>Aircraft/Kathryn/Nasal/panel.nas</file>
+  </panel>
+
+  <windwave>
+    <file>Aircraft/Kathryn/Nasal/wind-wave.nas</file>
+  </windwave>
+
+
+  <walkview>
+   <file>Aircraft/Generic/WalkView/walkview.nas</file>
+   <file>Aircraft/Kathryn/Systems/walk-views.nas</file>
+  </walkview>
+
+ </nasal>
+
+
+<!-- KEYBOARD BINDINGS -->
+ <input>
+  <!-- keyboard --><!-- Load the default keyboard bindings for the walk view (w/W, a, d, s). -->
+  <keyboard include="Aircraft/Generic/WalkView/walk-view-keys.xml">
+
+<!-- RUDDER CONTROL -->
+    <key n="356">
+      <name>Left arrow</name>
+      <desc>Move rudder left</desc>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>/controls/flight/rudder</property>
+        <step type="double">-0.01</step>
+      </binding>
+      <mod-alt>
+      <binding>
+        <command>property-adjust</command>
+        <property>/controls/flight/rudder</property>
+        <step type="double">-0.10</step>
+      </binding>
+      </mod-alt>
+    </key>
+
+    <key n="358">
+      <name>Right arrow</name>
+      <desc>Rudder right</desc>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+        <command>property-adjust</command>
+        <property>/controls/flight/rudder</property>
+        <step type="double">0.01</step>
+      </binding>
+      <mod-alt>
+      <binding>
+        <command>property-adjust</command>
+        <property>/controls/flight/rudder</property>
+        <step type="double">0.10</step>
+      </binding>
+      </mod-alt>
+    </key>
+
+    <key n="359">
+      <name>Down arrow</name>
+      <desc>Rudder center</desc>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/flight/rudder</property>
+        <value type="double">0.00</value>
+      </binding>
+    </key>
+
+<!-- ANCHORING -->
+    <key n="98">
+      <name>b</name>
+      <desc>Drop anchor</desc>
+      <binding>
+        <command>nasal</command>
+        <script>
+          aground.drop_anchor();
+        </script>
+      </binding>
+   </key>
+
+    <key n="66">
+      <name>B</name>
+      <desc>Weigh anchor</desc>
+      <binding>
+        <command>nasal</command>
+        <script>
+          aground.weigh_anchor();
+        </script>
+      </binding>
+   </key>
+
+<!-- PANEL -->
+   <key n="80">
+     <name>P</name>
+     <desc>Toggle Panel</desc>
+     <binding>
+      <command>nasal</command>
+      <script>
+        var showing = getprop("/sim/gui/canvas/window[1]/showing");
+        if(showing > 0)
+           {panel.hide();}
+        else
+          {panel.show();}
+      </script>
+    </binding>
+   </key>
+
+<!-- WIND WAVE ADJUSTMENTS -->
+   <key n="23">
+     <name>cntl w</name>
+     <desc>Toggle Wind-Wave</desc>
+     <binding>
+      <command>nasal</command>
+      <script>
+        var showing = getprop("/sim/gui/canvas/window[2]/showing");
+        if(showing > 0)
+           {windwave.hide();}
+        else
+          {windwave.show();}
+      </script>
+    </binding>
+   </key>
+
+
+<!-- REFLOATING -->
+   <key n="114">
+      <name>r</name>
+      <desc>Refloat</desc>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          aground.refloat();
+        </script>
+      </binding>
+   </key>
+
+<!-- MOVING -->
+   <key n="107">
+      <name>k</name>
+      <desc>Kedge</desc>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          gui.popupTip("Kedging aft");
+          setprop("fdm/jsbsim/external_reactions/kedge-X/magnitude", 300);
+        </script>
+      </binding>
+      <mod-alt> <!--WARP starboard-->
+        <binding>
+          <command>nasal</command>
+          <script>
+            gui.popupTip("Warping to starboard");
+            setprop("fdm/jsbsim/external_reactions/warp-yaw/magnitude-lbsft", 60000);
+          </script>
+        </binding>
+      </mod-alt>
+      <mod-up>
+        <binding>
+          <command>nasal</command>
+          <script>
+            setprop("fdm/jsbsim/external_reactions/kedge-X/magnitude", 0);
+            setprop("fdm/jsbsim/external_reactions/warp-yaw/magnitude-lbsft", 0);
+            aground.drop_anchor();
+          </script>
+        </binding>
+      </mod-up>
+   </key>
+
+   <key n="75">
+      <name>K</name>
+      <binding>
+        <command>nasal</command>
+        <script>
+          gui.popupTip("Warping to port");
+          setprop("fdm/jsbsim/external_reactions/warp-yaw/magnitude-lbsft", -60000);
+        </script>
+      </binding>
+      <mod-up>
+        <binding>
+          <command>nasal</command>
+          <script>
+            setprop("fdm/jsbsim/external_reactions/kedge-X/magnitude", 0);
+            setprop("fdm/jsbsim/external_reactions/warp-yaw/magnitude-lbsft", 0);
+            aground.drop_anchor();
+          </script>
+        </binding>
+      </mod-up>
+    </key>
+
+<!-- SAIL HANDLING -->
+   <key n="363">
+     <name>Delete</name>
+     <desc>Trim sails stbd</desc>
+     <repeatable type="bool">true</repeatable>
+     <binding>
+       <command>nasal</command>
+       <script>
+         sail_handling.trim_sails(1);
+       </script>
+     </binding>
+   </key>
+
+   <key n="127">
+     <name>End</name>
+     <desc>Trim sails port</desc>
+     <repeatable type="bool">true</repeatable>
+     <binding>
+       <command>nasal</command>
+       <script>
+         sail_handling.trim_sails(-1);
+       </script>
+     </binding>
+   </key>
+
+   <key n="360">
+     <name>PageUp</name>
+     <desc>Deploy sails</desc>
+     <repeatable type="bool">true</repeatable>
+     <binding>
+       <command>nasal</command>
+       <script>
+         sail_handling.deploy_sails(0.01);
+       </script>
+     </binding>
+   </key>
+
+   <key n="361">
+     <name>PageDown</name>
+     <desc>Reef sails</desc>
+     <repeatable type="bool">true</repeatable>
+     <binding>
+       <command>nasal</command>
+       <script>
+         sail_handling.deploy_sails(-0.01);
+       </script>
+     </binding>
+   </key>
+
+<!-- SAIL SELECTION -->
+   <key n="49">
+     <name>1</name>
+     <desc>Toggle Select sail[0] Jib</desc>
+     <binding>
+       <command>property-cycle</command>
+       <property>/surface-positions/sails/sail[0]/sail-selected</property>
+       <value>1</value>
+       <value>0</value>
+     </binding>
+   </key>
+
+   <key n="50">
+     <name>2</name>
+     <desc>Toggle Select sail[1] Main Sail</desc>
+     <binding>
+       <command>property-cycle</command>
+       <property>/surface-positions/sails/sail[1]/sail-selected</property>
+       <value>1</value>
+       <value>0</value>
+     </binding>
+   </key>
+
+ </keyboard>
+</input>
+
+<!-- GROUNDING/ANCHORING PROPERTIES -->
+  <position>
+    <aground type="bool">false</aground>
+    <anchored type="bool">false</anchored>
+  </position>
+
+
+
+<!-- SURFACES -->
+ <surface-positions>
+   <hull>
+     <hull-wetted-surface-sqft>819.6093</hull-wetted-surface-sqft> <!-- FreeCAD FCInfo "surface of the form" where 1 unit = 1 mm, assumed as meters, converted to feet-->
+     <rudder-sqft>14.0141</rudder-sqft>                            <!-- Wings3d area -->
+     <rudder-cof-x>14.798766</rudder-cof-x>                        <!-- Wings3d xyz -->
+     <rudder-cof-y>-0.050265</rudder-cof-y>                        <!-- Wings3d xyz -->
+     <rudder-cof-z>-0.701324</rudder-cof-z>                        <!-- Wings3d xyz -->
+     <!-- keels provide heeling counter-balance, lateral resistance/drag and forward thrust/lift -->
+     <full-keel-sqft type="double">37.611</full-keel-sqft>         <!-- Wings3d area -->
+
+     <center-board-sqft type="double">28.35</center-board-sqft>         <!-- Wings3d area -->
+     <center-board-drop-norm type="double">1.0</center-board-drop-norm> <!-- 0.0 - 1.0 percentage of centboard dropped -->
+     <center-board-cof-x type="double">5.511927</center-board-cof-x>    <!-- Wings3d xyz -->
+     <center-board-cof-y type="double">0.0</center-board-cof-y>         <!-- Wings3d xyz -->
+     <center-board-cof-z type="double">-1.314504</center-board-cof-z>   <!-- Wings3d xyz -->
+   </hull>
+
+   <sails>
+     <!-- sails provide thrust/lift, yaw and heeling moments -->
+     <number-of-sails>2</number-of-sails>
+
+     <sail>       <!-- JIB SAIL = surface-positions/sails/sail[0]/ -->
+       <sail-name>jib</sail-name>
+       <sail-sqft>429.82</sail-sqft>                                  <!-- total area of sail added up in wings -->
+       <sail-cof-x>1.5478</sail-cof-x>                                <!-- Blender center of mass -->
+       <sail-cof-y>0.00</sail-cof-y>                                  <!-- FreeCAD FCInfo -->
+       <sail-cof-z>7.3979</sail-cof-z>                                 <!-- Blender center of mass -->
+       <sail-type>stay</sail-type>                                    <!-- square sail or stay sail -->
+       <sail-selected type="bool">1</sail-selected>                   <!-- sail selection flag -->
+       <sail-beta-deg>0</sail-beta-deg>                               <!-- used in calculating sail drag and side forces -->
+       <sail-trim-max>45</sail-trim-max>                              <!-- maximum degree of allowable trim -->
+       <sail-set type="string">stbd</sail-set>                        <!-- showing port or stbd model -->
+       <sail-set-norm type="double">-1</sail-set-norm>                <!-- showing port (-1) or stbd (1)-->
+       <sail-bearing-deg type="double">1.0</sail-bearing-deg>         <!-- offset from bow -->
+       <sail-bearing-norm type="double">0.0</sail-bearing-norm>       <!-- sail-bearing divided by max trim to give -1.0 to +1.0 value -->
+       <sail-bearing-hdg-deg type="double">0.0</sail-bearing-hdg-deg> <!-- adjusted by ship heading -->
+       <sail-fill type="double">1.0</sail-fill>                       <!-- amount of billowing of sail -->
+       <sail-reef-norm type="double">0.0</sail-reef-norm>             <!-- scale/show sail when deployed -->
+       <sail-furl-reef type="double">1.0</sail-furl-reef>             <!-- scale/show furled sail -->
+     </sail>
+
+     <sail>       <!-- MAIN SAIL = surface-positions/sails/sail[1]/ -->
+       <sail-name>main</sail-name>
+       <sail-sqft>1054.66</sail-sqft>                                 <!-- total area of sail added up in Wings -->
+       <sail-cof-x>9.0638</sail-cof-x>                                <!-- Blender center of mass -->
+       <sail-cof-y>0.00</sail-cof-y>                                  <!-- not yet implemented -->
+       <sail-cof-z>7.2009</sail-cof-z>                                <!-- Blender center of mass -->
+       <sail-type>stay</sail-type>                                    <!-- square sail or stay sail -->
+       <sail-selected type="bool">1</sail-selected>                   <!-- sail selection flag -->
+       <sail-beta-deg>0</sail-beta-deg>                               <!-- used in calculating sail drag and side forces -->
+       <sail-trim-max>45</sail-trim-max>                              <!-- maximum degree of allowable trim -->
+       <sail-set type="string">stbd</sail-set>                        <!-- showing port or stbd model-->
+       <sail-set-norm type="double">1</sail-set-norm>                  <!-- showing port (-1) or stbd  (1) -->
+       <sail-bearing-deg type="double">1.0</sail-bearing-deg>         <!-- offset from bow-->
+       <sail-bearing-norm type="double">0.0</sail-bearing-norm>       <!-- sail-bearing divided by max trim to give -1.0 to +1.0 value -->
+       <sail-bearing-hdg-deg type="double">0.0</sail-bearing-hdg-deg> <!-- adjusted by ship heading-->
+       <sail-fill type="double">1.0</sail-fill>                       <!-- amount of billowing of sail -->
+       <sail-reef-norm>0</sail-reef-norm>                             <!-- scale/show sail when deployed -->
+       <sail-furl-reef type="double">1.0</sail-furl-reef>             <!-- scale/show furled sail -->
+     </sail>
+  </sails>
+ </surface-positions>
+
+ <orientation>
+  <beta-deg alias="/fdm/jsbsim/aero/hull-beta-deg"/>
+ </orientation>
+
+ <fdm>
+  <jsbsim>
+   <fcs>
+   </fcs>
+  </jsbsim>
+ </fdm>
+
+</PropertyList>

@@ -1,0 +1,501 @@
+<?xml version="1.0"?>
+<!--
+
+  The Kathryn "flight" model for JSBSim.
+
+    Copyright 2022 Jeffery S. Koppe (jeff.koppe(at)gmail.com)
+
+    Based on the Gokstad Ship for FlightGear
+    Copyright (C) 2013 - 2018  Anders Gidenstam  (anders(at)gidenstam.org)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+-->
+<?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
+<fdm_config name="Kathryn" version="2.0" release="ALPHA"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
+
+ <fileheader>
+  <author>Jeffery S. Koppe</author>
+  <email>jeff.koppe(at)gmail.com</email>
+
+  <filecreationdate>2022-06-20</filecreationdate>
+  <version>2022-06-20</version>
+
+  <description>Skipjack Kathryn</description>
+
+  <license>
+   <licenseName>GPL v2+</licenseName>
+   <licenseURL>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</licenseURL>
+  </license>
+  <note>
+   This model was created using publicly available data, publicly available
+   technical reports, textbooks, and guesses. It contains no proprietary or
+   restricted data.
+
+   This model is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+  </note>
+
+  <reference refID="none"
+             author="none"
+             title="none"
+             date="none"/>
+ </fileheader>
+
+ <documentation>
+  The origin of the structural frame is at the bow of the ship at waterline. See the 3d model.
+ </documentation>
+
+ <metrics>
+  <!-- wingarea unit="M2">   0.0 </wingarea>
+  <wingspan unit="M">    0.0 </wingspan>
+  <chord unit="M">       0.0 </chord>
+  <htailarea unit="M2">  0.0 </htailarea>
+  <htailarm unit="M">    0.0 </htailarm>
+  <vtailarea unit="M2">  0.0 </vtailarea>
+  <vtailarm unit="M">    0.0 </vtailarm -->
+
+  <location name="AERORP" unit="M">
+ <!-- Center of surface of all sails as determined in Blender (old=6.64/0/0)-->
+    <x>  5.25 </x>
+    <y>  0.00 </y>
+    <z>  7.29 </z>
+
+  </location>
+  <location name="EYEPOINT" unit="M">
+    <x> 14.00 </x>
+    <y>  2.50 </y>
+    <z>  0.00 </z>
+  </location>
+
+   <location name="VRP" unit="M">
+    <x> 0.00 </x>
+    <y> 0.00 </y>
+    <z> 0.00 </z>
+   </location>
+ </metrics>
+
+ <mass_balance>
+  <documentation>
+     Length:       15.24m     / 50.0f -- https://councilofamericanmaritimemuseums.org/wp-content/uploads/2014/03/kathryn-data.pdf
+     Beam:          5.12m     / 16.8f
+     Depth:         1.28m     /  4.2f
+     Displacement: 10886.22kg / 12ton -- https://councilofamericanmaritimemuseums.org/wp-content/uploads/2014/03/kathryn-data.pdf
+  </documentation>
+  <documentation>
+    Rough model to estimate CG and inertia tensor.
+
+    % Steiners theorem:
+    % Ixx = \bar{Ixx} + m sqrt(\bar{y}^2 + \bar{z}^2)
+    % Ixy = \bar{Ixy} + m \bar{x} \bar{y}
+
+    % The hull is a uniform 15 x 5 x 1 meter box.
+    % CG in the middle (i.e. at (7.62, 0, 0.5)) m.
+    m_hull = 10886.22 % KG
+    a = 15    % m
+    b = 5     % m
+    c = 1     % m
+
+    Ixx_hull = 1/12 * m_hull * (b^2 + c^2) = 22679.625
+    Iyy_hull = 1/12 * m_hull * (a^2 + c^2) = 204116.625
+    Izz_hull = 1/12 * m_hull * (a^2 + b^2) = 5102915.625
+    Ixy_hull = Ixz_hull = Iyz_hull = 0
+
+    Ixx = Ixx_hull
+    Iyy = Iyy_hull
+    Izz = Izz_hull
+    Ixy = Ixy_hull
+    Ixz = Ixz_hull
+    Iyz = Iyz_hull
+  </documentation>
+
+ <!-- Kathryn -->
+  <ixx unit="KG*M2">   22679.625 </ixx>
+  <iyy unit="KG*M2">  204116.625 </iyy>
+  <izz unit="KG*M2"> 5102915.625 </izz>
+  <emptywt unit="KG">  10886.22 </emptywt>
+
+  <location name="CG" unit="M">
+    <!-- COG as determined as center of mass in Blender -->
+   <x> 7.94 </x>
+   <y> 0.00 </y>
+   <z> 0.37 </z>
+  </location>
+
+  <documentation>Adjustable payload pointmasses.</documentation>
+  <!-- Cargo weights. -->
+  <!--
+  <pointmass name="Forward cargo">
+   <weight unit="KG"> 0.0 </weight>
+   <location unit="M">
+    <x> 7.00 </x>
+    <y> 0.00 </y>
+    <z> 0.80 </z>
+   </location>
+  </pointmass>
+  <pointmass name="Aft cargo">
+   <weight unit="KG"> 400.0 </weight>
+   <location unit="M">
+    <x> 16.00 </x>
+    <y>  0.00 </y>
+    <z>  0.80 </z>
+   </location>
+  </pointmass>
+-->
+  <!-- Fixed weights. -->
+
+  <!-- Ballast. -->
+
+ </mass_balance>
+
+ <ground_reactions>
+  <documentation>Used to determine grounded status</documentation>
+
+  <contact type="STRUCTURE" name="BOW">
+   <location unit="M">
+    <x>   0.00 </x>
+    <y>   0.00 </y>
+    <z>   4.00 </z>
+   </location>
+  </contact>
+
+  <contact type="STRUCTURE" name="STERN">
+   <location unit="M">
+    <x>  21.20 </x>
+    <y>   0.00 </y>
+    <z>   4.00 </z>
+   </location>
+  </contact>
+
+  <contact type="STRUCTURE" name="PORT SIDE">
+   <location unit="M">
+    <x> 8.36 </x>
+    <y> -2.24 </y>
+    <z>  3.50 </z>
+   </location>
+  </contact>
+
+  <contact type="STRUCTURE" name="STARBOARD SIDE">
+   <location unit="M">
+    <x> 8.36 </x>
+    <y>  2.24 </y>
+    <z>  3.50 </z>
+   </location>
+  </contact>
+
+ </ground_reactions>
+
+ <documentation>The hydrodynamic interactions of the hull are modelled by external forces.</documentation>
+
+ <external_reactions>
+   <force name="hydro-X" frame="LOCAL" unit="LBS">
+   <location unit="M">
+     <x>  7.94 </x>
+     <y>  0.00 </y>
+     <z>  1.00 </z>
+    <!-- x> 7.32 </x>
+    <y> 0.00 </y>
+    <z> 1.00 </z -->
+   </location>
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+  <force name="hydro-Y" frame="LOCAL" unit="LBS">
+   <location unit="M">
+     <x>  7.94 </x>
+     <y>  0.00 </y>
+     <z>  1.00 </z>
+    <!--x> 7.32 </x>
+    <y> 0.00 </y>
+    <z> 1.00 </z -->
+   </location>
+   <direction>
+    <x> 0.0 </x>
+    <y> 1.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+  <force name="hydro-Z" frame="LOCAL" unit="LBS">
+   <location unit="M">
+     <x>  7.94 </x>
+     <y>  0.00 </y>
+     <z>  1.00 </z>
+    <!--x> 7.32 </x>
+    <y>   0.00 </y>
+    <z>   1.00 </z -->
+   </location>
+   <direction>
+    <x> 0.0 </x>
+    <y> 0.0 </y>
+    <z>-1.0 </z>
+   </direction>
+  </force>
+
+  <moment name="hydro-pitch" frame="BODY" unit="LBSFT">
+   <direction>
+    <x> 0.0 </x>
+    <y> 1.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </moment>
+  <moment name="hydro-roll" frame="BODY" unit="LBSFT">
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </moment>
+  <moment name="hydro-yaw" frame="BODY" unit="LBSFT">
+   <direction>
+    <x> 0.0 </x>
+    <y> 0.0 </y>
+    <z> 1.0 </z>
+   </direction>
+  </moment>
+
+<!-- SAILS THRUST -->
+   <force name="sails-X" frame="BODY" unit="LBS">
+   <location unit="M">
+     <x>  7.94 </x>
+     <y>  0.00 </y>
+     <z>  1.00 </z>
+   </location>
+   <direction>
+     <x> 1.0 </x>
+     <y> 0.0 </y>
+     <z> 0.0 </z>
+   </direction>
+  </force>
+
+<!-- SAILS ROLL/HEEL -->
+  <moment name="sails-heel" frame="BODY" unit="LBSFT">
+   <direction>
+    <x> 1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </moment>
+
+<!-- SAILS LEEWAY -->
+  <force name="sails-leeway" frame="BODY" unit="LBS">
+   <location unit="M">
+     <x>  7.94 </x>
+     <y>  0.00 </y>
+     <z>  1.00 </z>
+   </location>
+   <direction>
+    <x> 0.0 </x>
+    <y> 1.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+
+<!-- SAILS YAW -->
+  <moment name="sails-yaw" frame="BODY" unit="LBSFT">
+    <direction>
+    <x> 0.0 </x>
+    <y> 0.0 </y>
+    <z> 1.0 </z>
+    </direction>
+  </moment>
+
+
+<!-- ANCHORS -->
+     <force name="anchoring-coupling-north" frame="LOCAL">
+      <location unit="M">
+        <x> 0.00 </x>
+        <y> 0.00 </y>
+        <z> 0.00 </z>
+      </location>
+      <direction>
+       <x> 1.0 </x>
+       <y> 0.0 </y>
+       <z> 0.0 </z>
+      </direction>
+     </force>
+
+     <force name="anchoring-coupling-east" frame="LOCAL">
+      <location unit="M">
+        <x> 0.00 </x>
+        <y> 0.00 </y>
+        <z> 0.00 </z>
+      </location>
+      <direction>
+       <x> 0.0 </x>
+       <y> 1.0 </y>
+       <z> 0.0 </z>
+      </direction>
+     </force>
+
+  <force name="kedge-X" frame="BODY" unit="LBS">
+   <location unit="M">
+    <x> 0.00 </x>
+    <y> 0.00 </y>
+    <z> 0.00 </z>
+   </location>
+   <direction>
+    <x> -1.0 </x>
+    <y> 0.0 </y>
+    <z> 0.0 </z>
+   </direction>
+  </force>
+
+  <moment name="warp-yaw" frame="BODY" unit="LBSFT">
+    <location unit="M">
+     <x> 0.00 </x>
+     <y> 0.00 </y>
+     <z> 0.00 </z>
+    </location>
+   <direction>
+    <x> 0.0 </x>
+    <y> 0.0 </y>
+    <z> 1.0 </z>
+   </direction>
+  </moment>
+
+ </external_reactions>
+
+<!-- from joystick file: /controls/flight/rudder -->
+ <system name="steering gear">
+  <channel name="steering">
+   <summer name="tmp/rudder-pos-norm">
+    <input>fcs/rudder-cmd-norm</input>
+    <clipto>
+     <min> -1 </min>
+     <max>  1 </max>
+    </clipto>
+    <output>fcs/rudder-pos-norm</output>
+   </summer>
+  </channel>
+</system>
+
+ <system file="visual-reference-point-extensions"/>
+ <system file="hydrodynamics"/>
+ <system file="Kathryn-hydrodynamics"/>
+
+ <system file="hydrodynamic-planing">
+  <!-- Parameters defining the planing surfaces of the hull. -->
+  <!-- NOTE: Coordinates in the hydro RP frame. -->
+
+  <property value="0.0">hydro/planing/forebody-length-ft</property>
+  <property value="0.0">hydro/planing/forebody-beam-ft</property>
+  <property value="0.0">hydro/planing/forebody-keel-z-ft</property>
+  <property value="0.0">hydro/planing/forebody-end-x-ft</property>
+
+  <property value="0.0">hydro/planing/middlebody-length-ft</property>
+  <property value="0.0">hydro/planing/middlebody-beam-ft</property>
+  <property value="0.0">hydro/planing/middlebody-keel-z-ft</property>
+  <property value="0.0">hydro/planing/middlebody-end-x-ft</property>
+
+  <property value="0.0">hydro/planing/afterbody-length-ft</property>
+  <property value="0.0">hydro/planing/afterbody-beam-ft</property>
+  <property value="0.0">hydro/planing/afterbody-keel-z-ft</property>
+  <property value="0.0">hydro/planing/afterbody-end-x-ft</property>
+
+  <property value="0.80">hydro/planing/forebody-normal-force-factor</property>
+  <property value="0.0">hydro/planing/middlebody-normal-force-factor</property>
+  <property value="0.0">hydro/planing/afterbody-normal-force-factor</property>
+
+  <!-- FIXME: Replace with Reynolds number based coefficient? -->
+  <property value="0.005">hydro/planing/forebody-skin-friction-coefficient</property>
+  <property value="0.0">hydro/planing/middlebody-skin-friction-coefficient</property>
+  <property value="0.0">hydro/planing/afterbody-skin-friction-coefficient</property>
+</system>
+
+  <!-- system file="Kathryn-hull"/ -->  <!-- hull -->
+  <system file="Kathryn-anchor"/>  <!-- anchor -->
+
+  <system file="Kathryn-sail-0"/>  <!-- jib -->
+  <system file="Kathryn-sail-1"/>  <!-- mainsail -->
+  <system name="sails-thrust">
+
+  <channel name="sailing">
+
+      <summer name="sailing-thrust">
+      <documentation> Necessity of max probably indicates that thrust forces are not accurate as they can produce excessive speeds</documentation>
+        <input>aero/force/D_sail-0-lbs</input>
+        <input>aero/force/D_sail-1-lbs</input>
+        <clipto>
+          <min>0.0</min>
+          <max>75.0</max>
+        </clipto>
+        <output> external_reactions/sails-X/magnitude </output>
+      </summer>
+  </channel>
+  </system>
+
+  <system name="sails-heel">
+  <channel name="sailing">
+      <summer name="sailing-heel">
+        <input>aero/moment/heel_sail-0-lbsft</input>
+        <input>aero/moment/heel_sail-1-lbsft</input>
+        <output>external_reactions/sails-heel/magnitude-lbsft</output>
+      </summer>
+  </channel>
+  </system>
+
+
+  <system name="hull-leeway">
+  <channel name="sailing">
+  <fcs_function>
+    <description>( degrees(?) of leeway  =  Konstant * heel / speed squared )  https://sailboatinstruments.blogspot.com/2011/02/leeway-calibration.html</description>
+    <function name="hull-leeway">
+      <quotient>
+        <product>
+          <value>15</value> <!-- Konstant; see discussion: https://forums.sailinganarchy.com/threads/h5000-leeway-coefficient.198577/ -->
+          <property>/fdm/jsbsim/hydro/hull/roll-deg</property>
+        </product>
+        <sum>
+            <value>0.0001</value> <!-- avoid divide by zero error and segfault-->
+            <product>
+              <property>/velocities/groundspeed-kt</property>
+              <property>/velocities/groundspeed-kt</property>
+            </product>
+        </sum>
+      </quotient>
+    </function>
+  </fcs_function>
+
+  <summer name="leeway">
+    <input>hull-leeway</input>
+    <output>external_reactions/sails-leeway/magnitude</output>
+  </summer>
+
+  </channel>
+</system>
+
+  <system name="sails-yaw">
+  <channel name="sailing">
+      <summer name="sailing-yaw">
+        <input>aero/moment/yaw_sail-1-lbsft</input>
+        <input>aero/moment/yaw_sail-0-lbsft</input>
+        <output>external_reactions/sails-yaw/magnitude-lbsft</output>
+      </summer>
+  </channel>
+  </system>
+
+
+ <aerodynamics>
+
+ </aerodynamics>
+
+</fdm_config>

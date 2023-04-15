@@ -1,0 +1,486 @@
+<?xml version="1.0"?>
+<!--
+  The Skipjack Kathryn for FlightGear.
+
+  Copyright (C) 2022  Jeffery S. Koppe (jeff.koppe(at)gmail.com
+  This file is licensed under the GPL license version 2 or later.
+
+  Based on the Gokstad Ship for FlightGear
+  Copyright (C) 2014 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
+
+-->
+<PropertyList>
+
+  <path>Kathryn.ac</path>
+  <offsets>
+    <x-m> 0.00 </x-m>
+    <y-m> 0.00 </y-m>
+    <z-m> 0.8 </z-m>
+  </offsets>
+
+  <model>
+    <path>/Crew/erik.xml</path>
+    <offsets>
+      <x-m> 14.4 </x-m>
+      <y-m> -0.7 </y-m>
+      <z-m> 0.75 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>/Pennant/pennant.xml</path>
+    <offsets>
+      <x-m> 6.084096 </x-m>
+      <y-m> -0.013633 </y-m>
+      <z-m> 18.168917 </z-m>
+    </offsets>
+  </model>
+
+<effect>
+  <name>Effects/reflection</name>
+  <inherits-from>Aircraft/Generic/Effects/Fuselagereflect</inherits-from>
+    <!-- object-name>cabin_window_front_glass</object-name -->
+    <!-- object-name>cabin_glass</object-name -->
+    <object-name>rail_fore_wood_white</object-name>
+    <object-name>rail_fore_pins_wood_white</object-name>
+    <object-name>rail_aft_lower_wood_white</object-name>
+    <object-name>rail_aft_top_wood_white</object-name>
+    <object-name>rail_aft_pins_wood_white</object-name>
+    <object-name>sail_jib_port_sails</object-name>
+    <object-name>sail_main_port_sails</object-name>
+    <object-name>name_sign_name_board</object-name>
+    <object-name>eagle_name_board</object-name>
+    <object-name>cabin_interior_winder</object-name>
+    <object-name>sail_jib_stbd_sails</object-name>
+    <object-name>sail_main_stbd_sails</object-name>
+    <object-name>sail_jib_furled_sails</object-name>
+    <object-name>sail_main_furled_sails</object-name>
+    <object-name>sail_main_furled_wood</object-name>
+    <object-name>bow_head_rail_upper_sep38_wood_white</object-name>
+    <object-name>bow_head_rail_upper_sep37_wood_white</object-name>
+    <object-name>pennant_hull_bottom</object-name>
+    <object-name>doghouse_roof_hull_sides</object-name>
+    <object-name>aft_stay_winder</object-name>
+    <object-name>winder_winder</object-name>
+    <object-name>wheel_wheel_wood</object-name>
+    <object-name>sail_main_rings_wood</object-name>
+    <object-name>jib_stay_winder</object-name>
+    <object-name>main_back_stays_winder</object-name>
+    <object-name>forestay_winder</object-name>
+    <object-name>hull_deck</object-name>
+    <object-name>hull_hull_bottom</object-name>
+    <object-name>hull_hull_sides</object-name>
+    <object-name>hull_wood_white</object-name>
+    <object-name>bumper_wood</object-name>
+    <object-name>bow_cap_hull_sides</object-name>
+    <object-name>bow_cap_wood_white</object-name>
+    <object-name>bow_sprit_plank_wood_white</object-name>
+    <object-name>winder_engine_housing_hull_sides</object-name>
+    <object-name>winder_engine_housing_wood_white</object-name>
+    <object-name>cabin_hull_sides</object-name>
+    <object-name>cabin_wood_white</object-name>
+    <object-name>hatch_fore_hull_sides</object-name>
+    <object-name>hatch_fore_wood</object-name>
+    <object-name>hatch_fore_wood_white</object-name>
+    <object-name>hatch_aft_hull_sides</object-name>
+    <object-name>hatch_aft_wood_white</object-name>
+    <object-name>hatch_main_hull_sides</object-name>
+    <object-name>hatch_main_wood_white</object-name>
+    <object-name>deck_fore_hull_sides</object-name>
+    <object-name>deck_fore_wood_white</object-name>
+    <object-name>sampson_post_wood_white</object-name>
+    <object-name>helm_hull_sides</object-name>
+    <object-name>helm_wood</object-name>
+    <object-name>helm_wood_white</object-name>
+    <object-name>rudder_hull_bottom</object-name>
+    <object-name>bow_name_board_name_board</object-name>
+    <object-name>bow_sprit_wood</object-name>
+    <object-name>mast_winder</object-name>
+    <object-name>mast_wood</object-name>
+    <object-name>jib_boom_wood</object-name>
+    <object-name>sail_main_boom_wood</object-name>
+</effect>
+
+
+ <!-- Shader effects -->
+ <effect>
+  <inherits-from>Models/Effects/hull-normal-map</inherits-from>
+  <object-name>hull_hull_sides</object-name>
+ </effect>
+
+ <!-- Rembrandt transparency markup. -->
+ <effect>
+  <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>cabin_glass</object-name>
+  <object-name>cabin_hull_sides</object-name>
+  <object-name>cabin_window_front_glass</object-name>
+ </effect>
+
+ <!-- Livery selection =====================================================-->
+ <!-- animation>
+  <type>material</type>
+  <object-name></object-name>
+  <property-base>sim/model/livery</property-base>
+  <texture-prop>texture</texture-prop>
+  <texture>Liveries/.png</texture>
+ </animation -->
+
+
+<!-- Wheel/Rudder Movement ==============================================================-->
+  <animation>
+    <type>rotate</type>
+    <object-name>wheel_wheel_wood</object-name>
+    <property>fdm/jsbsim/fcs/rudder-cmd-norm</property>
+    <factor> 100 </factor>
+    <center>
+      <x-m> 14.18788 </x-m>
+      <y-m>  -0.005677 </y-m>
+      <z-m>  1.442191 </z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>rudder_hull_bottom</object-name>
+    <property>fdm/jsbsim/fcs/rudder-cmd-norm</property>
+    <factor> 30 </factor>
+    <axis>
+      <x1-m> 14.413385 </x1-m>
+      <y1-m> 0.056888 </y1-m>
+      <z1-m> -0.081877 </z1-m>
+      <x2-m> 13.769717 </x2-m>
+      <y2-m> 0.056888 </y2-m>
+      <z2-m> -1.277803 </z2-m>
+    </axis>
+  </animation>
+
+
+
+  <!-- JIB SAIL ==============================================================-->
+  <!-- display either stbd or port sail dependent upon wind bearing. wind bearing is determined in panel update nasal code -->
+  <!-- /surface-positions/sails/sail[0] -->
+  <animation>
+    <type>select</type>
+    <object-name>sail_jib_port_sails</object-name>
+    <condition>
+      <equals>
+        <property>/surface-positions/sails/sail[0]/sail-set</property>
+        <value>port</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>sail_jib_stbd_sails</object-name>
+    <condition>
+      <equals>
+        <property>/surface-positions/sails/sail[0]/sail-set</property>
+        <value>stbd</value>
+      </equals>
+    </condition>
+  </animation>
+
+
+   <animation>
+    <type>rotate</type>
+    <object-name>sail_jib_stbd_sails</object-name>
+    <object-name>sail_jib_port_sails</object-name>
+    <object-name>jib_boom_wood</object-name>
+    <object-name>sail_jib_furled_sails</object-name>
+    <property>surface-positions/sails/sail[0]/sail-bearing-deg</property>
+    <factor>-0.5</factor>
+    <!-- offset-deg>0.0</offset-deg -->
+    <axis>
+     <x1-m> 5.120957  </x1-m>
+     <y1-m> 0.056888  </y1-m>
+     <z1-m> 13.935724 </z1-m>
+     <x2-m> -3.895945 </x2-m>
+     <y2-m> 0.059888  </y2-m>
+     <z2-m> 2.913283  </z2-m>
+    </axis>
+  </animation>
+
+  <!-- fill jib sail to stbd or port -->
+  <animation>
+    <type>scale</type>
+    <object-name>sail_jib_stbd_sails</object-name>
+    <object-name>sail_jib_port_sails</object-name>
+    <property>surface-positions/sails/sail[0]/sail-fill</property>
+    <center>
+     <x-m> 3.683750</x-m>
+     <y-m> 0.056888</y-m>
+     <z-m> 2.448687</z-m>
+    </center>
+    <x-max>1.0</x-max>
+    <y-max>2.0</y-max>
+    <z-max>1.0</z-max>
+    <x-min>1.0</x-min>
+    <y-min>-2.0</y-min>
+    <z-min>1.0</z-min>
+   </animation>
+
+  <!-- scale the sail when raised/lowered -->
+   <animation>
+    <type>scale</type>
+    <object-name>sail_jib_stbd_sails</object-name>
+    <object-name>sail_jib_port_sails</object-name>
+    <!--property>controls/engines/engine[0]/throttle</property-->
+    <property>surface-positions/sails/sail[0]/sail-reef-norm</property>
+    <center>
+     <x-m> -3.895945 </x-m>
+     <y-m> 0.059888  </y-m>
+     <z-m> 2.913283  </z-m>
+    </center>
+    <x-max>1.0</x-max>
+    <y-max>1.0</y-max>
+    <z-max>1.0</z-max>
+    <x-min>0.0</x-min>
+    <y-min>0.0</y-min>
+    <z-min>0.0</z-min>
+   </animation>
+
+   <!-- scale the furled sail when raised/lowered -->
+   <animation>
+    <type>scale</type>
+    <object-name>sail_jib_furled_sails</object-name>
+    <!-- property>controls/engines/engine[0]/throttle</property -->
+    <property>surface-positions/sails/sail[0]/sail-furl-reef</property>
+    <center>
+     <x-m> -3.895945 </x-m>
+     <y-m> 0.059888  </y-m>
+     <z-m> 2.913283  </z-m>
+    </center>
+    <x-max>1.0</x-max>
+    <y-max>1.0</y-max>
+    <z-max>1.0</z-max>
+    <x-min>0.0</x-min>
+    <y-min>0.0</y-min>
+    <z-min>0.0</z-min>
+   </animation>
+
+
+
+
+<!-- MAIN SAIL ==============================================================-->
+<!-- display either stbd or port sail dependent upon wind bearing. -->
+<animation>
+  <type>select</type>
+  <object-name>sail_main_stbd_sails</object-name>
+  <condition>
+    <equals>
+      <property>/surface-positions/sails/sail[1]/sail-set</property>
+      <value>stbd</value>
+    </equals>
+  </condition>
+</animation>
+
+<animation>
+  <type>select</type>
+  <object-name>sail_main_port_sails</object-name>
+  <condition>
+    <equals>
+      <property>/surface-positions/sails/sail[1]/sail-set</property>
+      <value>port</value>
+    </equals>
+  </condition>
+</animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>sail_main_boom_wood</object-name>
+  <object-name>sail_main_stbd_sails</object-name>
+  <object-name>sail_main_port_sails</object-name>
+  <object-name>sail_main_rings_wood</object-name>
+  <object-name>aft_stay_winder</object-name>
+  <object-name>sail_main_furled_sails</object-name>
+  <property>surface-positions/sails/sail[1]/sail-bearing-deg</property>
+  <factor>-0.5</factor>
+  <offset-deg>0.0</offset-deg>
+  <axis>
+   <x1-m> 6.251835</x1-m>
+   <y1-m> 0.056888</y1-m>
+   <z1-m> 18.491003</z1-m>
+   <x2-m> 2.993468</x2-m>
+   <y2-m> 0.056888</y2-m>
+   <z2-m> 0.049534</z2-m>
+  </axis>
+ </animation>
+
+<!-- fill main sail to stbd or port -->
+<animation>
+  <type>scale</type>
+  <object-name>sail_main_stbd_sails</object-name>
+  <object-name>sail_main_port_sails</object-name>
+  <property>surface-positions/sails/sail[1]/sail-fill</property>
+  <center>
+   <x-m> 3.683750</x-m>
+   <y-m> 0.056888</y-m>
+   <z-m> 2.448687</z-m>
+  </center>
+  <x-max>1.0</x-max>
+  <y-max>2.0</y-max>
+  <z-max>1.0</z-max>
+  <x-min>1.0</x-min>
+  <y-min>-2.0</y-min>
+  <z-min>1.0</z-min>
+ </animation>
+
+ <!-- scale the sail when raised/lowered -->
+ <animation>
+  <type>scale</type>
+  <object-name>sail_main_stbd_sails</object-name>
+  <object-name>sail_main_port_sails</object-name>
+  <object-name>sail_main_rings_wood</object-name>
+  <!-- property>controls/engines/engine[1]/throttle</property -->
+  <property>surface-positions/sails/sail[1]/sail-reef-norm</property>
+  <center>
+   <x-m> 3.683750</x-m>
+   <y-m> 0.056888</y-m>
+   <z-m> 2.448687</z-m>
+  </center>
+   <x-max>1.0</x-max>
+   <y-max>1.0</y-max>
+   <z-max>1.0</z-max>
+   <x-min>0.0</x-min>
+   <y-min>0.0</y-min>
+   <z-min>0.0</z-min>
+
+ </animation>
+
+ <!-- scale the furled sail when raised/lowered -->
+ <animation>
+  <type>scale</type>
+  <object-name>sail_main_furled_sails</object-name>
+  <object-name>sail_main_furled_wood</object-name>
+  <property>surface-positions/sails/sail[1]/sail-furl-reef</property>
+  <!-- property>surface-positions/sails/sail[1]/sail-reef</property -->
+  <center>
+   <x-m> 3.683750</x-m>
+   <y-m> 0.056888</y-m>
+   <z-m> 2.448687</z-m>
+  </center>
+   <x-max>1.0</x-max>
+   <y-max>1.0</y-max>
+   <z-max>1.0</z-max>
+   <x-min>0.0</x-min>
+   <y-min>0.0</y-min>
+   <z-min>0.0</z-min>
+ </animation>
+
+
+
+
+ <!-- Bow Wake ==============================================================-->
+<model>
+  <name>Bow Wake</name>
+  <overlay>
+   <particlesystem>
+  <condition>
+   <greater-than>
+    <property>fdm/jsbsim/hydro/vbx-fps</property>
+    <value>1.2</value>
+   </greater-than>
+  </condition>
+    <shooter>
+     <phi-min-deg>40.0</phi-min-deg>
+     <phi-max-deg>-40.0</phi-max-deg>
+    </shooter>
+   </particlesystem>
+  </overlay>
+  <path>Aircraft/Kathryn/Models/Effects/wake.xml</path>
+  <offsets>
+   <x-m>  -0.20 </x-m>
+   <y-m>  0.00 </y-m>
+   <z-m>  0.17 </z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Bow Splash</name>
+  <overlay>
+   <particlesystem>
+     <condition>
+       <greater-than>
+         <property>fdm/jsbsim/hydro/vbx-fps</property>
+         <value>3.0</value>
+       </greater-than>
+     </condition>
+    <shooter>
+     <phi-min-deg>0.0</phi-min-deg>
+     <phi-max-deg>0.0</phi-max-deg>
+    </shooter>
+    <particle>
+      <start>
+        <size>
+          <value>0.30</value>
+        </size>
+      </start>
+      <end>
+      </end>
+    </particle>
+   </particlesystem>
+  </overlay>
+  <path>Aircraft/Kathryn/Models/Effects/splash.xml</path>
+  <offsets>
+   <x-m> -0.30 </x-m>
+   <y-m> 0.00 </y-m>
+   <z-m> -0.10 </z-m>
+  </offsets>
+ </model>
+
+
+ <!-- Propeller Wake ================================================================-->
+
+ <model>
+  <name>Stern Wake</name>
+  <path>Aircraft/Kathryn/Models/Effects/propeller_wake.xml</path>
+  <offsets>
+    <x-m> 15.0 </x-m>
+    <y-m> 0.00 </y-m>
+    <z-m> 0.05 </z-m>
+  </offsets>
+  <overlay>
+   <particlesystem>
+     <condition>
+       <greater-than>
+          <property>fdm/jsbsim/hydro/vbx-fps</property>
+          <value>1.0</value>
+       </greater-than>
+     </condition>
+     <shooter>
+   <theta-min-deg>90.0</theta-min-deg>
+   <theta-max-deg>95.0</theta-max-deg>
+   <phi-min-deg>-25.0</phi-min-deg>
+   <phi-max-deg>25.0</phi-max-deg>
+     </shooter>
+   </particlesystem>
+  </overlay>
+ </model>
+
+
+ <!-- Water ================================================================-->
+ <model>
+  <name>Water</name>
+  <path>Aircraft/Kathryn/Models/Water/water.xml</path>
+  <offsets>
+   <x-m>12.00</x-m>
+   <y-m>0.00</y-m>
+   <z-m>0.00</z-m>
+  </offsets>
+ </model>
+
+
+ <!-- LOD for the model as a whole =========================================-->
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>15000</max-m>
+ </animation>
+
+
+</PropertyList>

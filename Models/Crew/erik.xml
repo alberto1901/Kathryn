@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <path>erik.ac</path>
+
+  <!-- scan side-to-side -->
+  <animation>
+    <type>rotate</type>
+    <object-name>erik_hat_hat</object-name>
+    <object-name>erik_chest_shirt</object-name>
+    <object-name>erik_head_head</object-name>
+    <object-name>erik_arm_upper_right_shirt</object-name>
+    <object-name>erik_arm_upper_left_shirt</object-name>
+    <object-name>erik_arm_lower_right_shirt</object-name>
+    <object-name>erik_arm_lower_left_shirt</object-name>
+    <object-name>erik_hand_right_hands</object-name>
+    <object-name>erik_hand_left_hands</object-name>
+    <property>sim/model/torso_yaw</property>
+    <factor>0.5</factor>
+    <center>
+      <x-m>0.012365</x-m>
+      <y-m>0.017878</y-m>
+      <z-m>1.130109</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>1.0</z>
+    </axis>
+  </animation>
+
+
+  <!-- duck forward when sail boom gets close -->
+  <animation>
+    <type>rotate</type>
+    <object-name>erik_hat_hat</object-name>
+    <object-name>erik_chest_shirt</object-name>
+    <object-name>erik_head_head</object-name>
+    <object-name>erik_arm_upper_right_shirt</object-name>
+    <object-name>erik_arm_upper_left_shirt</object-name>
+    <object-name>erik_arm_lower_right_shirt</object-name>
+    <object-name>erik_arm_lower_left_shirt</object-name>
+    <object-name>erik_hand_right_hands</object-name>
+    <object-name>erik_hand_left_hands</object-name>
+    <property>surface-positions/sails/sail[1]/sail-bearing-deg</property>
+    <interpolation>
+      <entry>
+        <ind> 10</ind>
+        <dep> 0.0</dep>
+      </entry>
+       <entry>
+         <ind> -3.0</ind>
+         <dep> -55.0</dep>
+       </entry>
+       <entry>
+         <ind> -10</ind>
+         <dep> 0.0</dep>
+       </entry>
+    </interpolation>
+    <center>
+      <x-m>0.102365</x-m>
+      <y-m>0.017878</y-m>
+      <z-m>1.130109</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <!-- wave -->
+  <animation>
+    <type>rotate</type>
+    <object-name>erik_arm_upper_left_shirt</object-name>
+    <object-name>erik_arm_lower_left_shirt</object-name>
+    <object-name>erik_hand_left_hands</object-name>
+    <property>/sim/model/binocular_pitch</property>
+    <interpolation>
+      <entry>
+        <ind> 0</ind>
+        <dep> 0.0</dep>
+      </entry>
+       <entry>
+         <ind> 15 </ind>
+         <dep> 120</dep>
+       </entry>
+       <entry>
+         <ind> 45 </ind>
+         <dep> 120</dep>
+       </entry>
+       <entry>
+         <ind> 60</ind>
+         <dep> 0.0</dep>
+       </entry>
+    </interpolation>
+    <center>
+      <x-m>0.041211</x-m>
+      <y-m>0.27317</y-m>
+      <z-m>1.587922</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+      <object-name>erik_arm_lower_left_shirt</object-name>
+    <object-name>erik_hand_left_hands</object-name>
+    <property>/sim/model/binocular_pitch</property>
+    <interpolation>
+      <entry>
+        <ind> 0</ind>
+        <dep> 0.0</dep>
+      </entry>
+       <entry>
+         <ind> 15 </ind>
+         <dep> 60</dep>
+       </entry>
+       <entry>
+         <ind> 45 </ind>
+         <dep> 60</dep>
+       </entry>
+       <entry>
+         <ind> 60</ind>
+         <dep> 0.0</dep>
+       </entry>
+    </interpolation>
+    <center>
+      <x-m>-0.033</x-m>
+      <y-m>-0.361</y-m>
+      <z-m>1.394</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y> 1.0</y>
+      <z> 1.0</z>
+    </axis>
+  </animation>
+
+</PropertyList>

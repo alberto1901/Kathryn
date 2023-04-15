@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<PropertyList>
+
+  <path>pennant.ac</path>
+
+  <animation>  <!-- rotate dependent on wind direction -->
+  <type>rotate</type>
+  <object-name>pennant_pennant</object-name>
+  <expression>
+    <sum>
+      <property>environment/wind-from-heading-deg</property>
+      <property>/orientation/heading-deg</property>
+    </sum>
+  </expression>
+  <center>
+   <x-m> 0.0 </x-m>
+   <y-m> 0.0 </y-m>
+   <z-m> 0.0 </z-m>
+  </center>
+  <axis>
+   <x> 0.0 </x>
+   <y> 0.0 </y>
+   <z> 1.0 </z>
+  </axis>
+  </animation>
+
+
+ <!-- scale length randomly -->
+<animation>
+  <type>scale</type>
+  <object-name>pennant_pennant</object-name>
+    <property>/sim/model/binocular_pitch</property>
+    <interpolation>
+      <entry><ind> 0</ind><dep> 1.15</dep></entry>
+      <entry><ind> 13 </ind><dep> 0.60</dep></entry>
+      <entry><ind> 15 </ind><dep> 0.75</dep></entry>
+      <entry><ind> 30 </ind><dep> 1.10</dep></entry>
+      <entry><ind> 45 </ind><dep> 0.65</dep></entry>
+      <entry><ind> 52 </ind><dep> 1.10</dep></entry>
+      <entry><ind> 60</ind><dep> 0.85</dep></entry>
+    </interpolation>
+    <interpolation>
+      <entry><ind>  0.0 </ind><dep>  1.0 </dep></entry>
+      <entry><ind> 23.3 </ind><dep>  0.75 </dep></entry>
+      <entry><ind> 54.0 </ind><dep> 0.90</dep></entry>
+      <entry><ind>100.0 </ind><dep>  1.05 </dep></entry>
+    </interpolation>
+  <center>
+   <x-m> 0.0 </x-m>
+   <y-m> 0.0 </y-m>
+   <z-m> 0.0 </z-m>
+  </center>
+  <axis>
+   <x> 1.0 </x>
+   <y> 0.0 </y>
+   <z> 0.0 </z>
+  </axis>
+</animation>
+
+ <!-- lift and drop dependent on wind speed -->
+  <animation>
+  <type>rotate</type>
+  <object-name>pennant_pennant</object-name>
+  <sum>
+    <property>/environment/wind-speed-kt</property>
+    <property>/sim/model/binocular_pitch</property>
+  </sum>
+  <interpolation>
+     <entry><ind> 25 </ind><dep> -45 </dep></entry>
+     <entry><ind> 60 </ind><dep> -25 </dep></entry>
+     <entry><ind> 70 </ind><dep> -10 </dep></entry>
+     <entry><ind> 80 </ind><dep>  15 </dep></entry>
+     <entry><ind> 90 </ind><dep>  10 </dep></entry>
+  </interpolation>
+  <center>
+   <x-m> 0.0 </x-m>
+   <y-m> 0.0 </y-m>
+   <z-m> 0.0 </z-m>
+  </center>
+  <axis>
+   <x> 0.0 </x>
+   <y> -1.0 </y>
+   <z> 0.0 </z>
+  </axis>
+ </animation>
+
+<animation>
+  <type>spin</type>
+  <object-name>pennant_pennant</object-name>
+  <!--sum>
+    <property>/environment/wind-speed-kt</property -->
+    <property>/sim/model/binocular_pitch</property>
+  <!-- /sum -->
+    <interpolation>
+      <entry><ind> 0  </ind><dep> 15.0</dep></entry>
+      <entry><ind> 13 </ind><dep> -20 </dep></entry>
+      <entry><ind> 22 </ind><dep> 25  </dep></entry>
+      <entry><ind> 30 </ind><dep> 20  </dep></entry>
+      <entry><ind> 45 </ind><dep> -25 </dep></entry>
+      <entry><ind> 52 </ind><dep> 20  </dep></entry>
+      <entry><ind> 60 </ind><dep> -15.0</dep></entry>
+    </interpolation>
+    <interpolation>
+      <entry><ind>  0.0 </ind><dep>  0.0 </dep></entry>
+      <entry><ind> 23.3 </ind><dep>  -13 </dep></entry>
+      <entry><ind> 54.0 </ind><dep> 19.5 </dep></entry>
+      <entry><ind>100.0 </ind><dep>  0.0 </dep></entry>
+    </interpolation>
+  <center>
+   <x-m> 0.0 </x-m>
+   <y-m> 0.0 </y-m>
+   <z-m> 0.0 </z-m>
+  </center>
+  <axis>
+   <x> 1.0 </x>
+   <y> 0.0 </y>
+   <z> 0.0 </z>
+  </axis>
+</animation>
+
+
+</PropertyList>

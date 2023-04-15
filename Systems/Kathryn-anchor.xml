@@ -1,0 +1,277 @@
+<?xml version="1.0"?>
+<!--
+    Anchoring system for Skipjack Kathryn
+    Copyright (C) 2022  Jeffery S. Koppe  (jeff.koppe(at)gmail.com)
+
+    Based on:
+    Airship nose cone and main cable anchoring system for JSBSim.
+    Copyright (C) 2008 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+-->
+<system name="anchoring">
+
+ <documentation>
+  This system models a mast anchoring system with a anchoring cone connection
+  and a anchoring cable. The anchoring cone MUST be located at the vessel's
+  visual reference point (VRP).
+
+  Usage:
+
+   Include the visual-reference-point-extensions system first.
+
+   Define the following constant properties:
+     For the anchoring cone connection:
+       anchoring/anchoring-spring-coeff-lbs_ft      [lbs/ft]
+       anchoring/anchoring-damping-coeff-lbs_fps    [lbs*sec/ft]
+       anchoring/max-anchoring-force-lbs            [lbs]
+
+     For the anchoring cable:
+       anchoring/cable-spring-coeff-lbs_ft         [lbs/ft]
+       anchoring/max-cable-force-lbs               [lbs]
+       anchoring/max-winch-speed-fps              [ft/sec]
+
+   Define the following external forces:
+
+     <force name="anchoring-coupling-north" frame="LOCAL">
+      <location unit="M">
+       { VRP }
+      </location>
+      <direction>
+       <x> 1.0 </x>
+       <y> 0.0 </y>
+       <z> 0.0 </z>
+      </direction>
+     </force>
+     <force name="anchoring-coupling-east" frame="LOCAL">
+      <location unit="M">
+       { VRP }
+      </location>
+      <direction>
+       <x> 0.0 </x>
+       <y> 1.0 </y>
+       <z> 0.0 </z>
+      </direction>
+     </force>
+
+   The following properties control the anchoring operation:
+       anchoring/cable-connected -- Connects the cable    {0,1.0}
+       anchoring/winch-speed-fps -- Winch speed           [ft/sec]
+       anchoring/initial-cable-length-ft -- [ft]
+
+   Location of the anchor when dropped:
+       anchoring/latitude-deg
+       anchoring/longitude-deg
+
+ </documentation>
+
+ <!-- INTERFACE PROPERTIES -->
+
+ <!-- anchoring constants -->
+ <property value="750.0">anchoring/anchoring-spring-coeff-lbs_ft</property>
+ <property value="-350.0">anchoring/anchoring-damping-coeff-lbs_fps</property>
+ <property value="1500.0">anchoring/max-anchoring-force-lbs</property>
+
+ <!-- the anchoring cable -->
+ <property value="16.0">anchoring/cable-spring-coeff-lbs_ft</property>
+ <property value="1500.0">anchoring/max-cable-force-lbs</property>
+ <property value="4.5">anchoring/max-winch-speed-fps</property>
+
+ <!--  anchoring actions -->
+ <property value="0.0"> anchoring/cable-connected </property>
+ <property value="1.5"> anchoring/winch-speed-fps </property>
+ <property value="25.0"> anchoring/initial-cable-length-ft </property>
+
+ <!--  anchor location when weighed. Note: Geodetic latitude and altitude. -->
+ <property value="0.0"> anchoring/latitude-deg  </property>
+ <property value="0.0"> anchoring/longitude-deg </property>
+
+ <channel name="anchoring Forces">
+
+   <fcs_function name="anchoring/latitude-diff-ft">
+    <function>
+     <product>
+      <property> position/latitude-unit-distance-ft_deg </property>
+      <difference>
+       <property> anchoring/latitude-deg </property>
+       <property> position/vrp-latitude-deg </property>
+      </difference>
+     </product>
+    </function>
+   </fcs_function>
+
+   <fcs_function name="anchoring/longitude-diff-ft">
+    <function>
+     <product>
+      <property> position/longitude-unit-distance-ft_deg </property>
+      <difference>
+       <property> anchoring/longitude-deg </property>
+       <property> position/vrp-longitude-deg </property>
+      </difference>
+     </product>
+    </function>
+   </fcs_function>
+
+   <fcs_function name="anchoring/total-distance-ft">
+    <function>
+     <pow>
+      <sum>
+       <pow>
+        <property> anchoring/latitude-diff-ft </property>
+        <value> 2.0 </value>
+       </pow>
+       <pow>
+        <property> anchoring/longitude-diff-ft </property>
+        <value> 2.0 </value>
+       </pow>
+      </sum>
+      <value> 0.5 </value>
+     </pow>
+    </function>
+   </fcs_function>
+
+   <switch name="anchoring/anchored">
+    <default value="0.0"/>
+    <test logic="AND" value="1.0">
+     anchoring/cable-connected GE 1.0
+     anchoring/total-distance-ft LE 50.0
+    </test>
+   </switch>
+
+   <fcs_function name="anchoring/anchoring-force-lbs">
+    <function>
+     <product>
+      <property> anchoring/anchored </property>
+      <property> anchoring/anchoring-spring-coeff-lbs_ft </property>
+      <property> anchoring/total-distance-ft </property>
+     </product>
+    </function>
+    <clipto>
+     <min> 0.0 </min>
+     <max> anchoring/max-anchoring-force-lbs </max>
+    </clipto>
+   </fcs_function>
+
+   <switch name="anchoring/winch-reset">
+    <default value="-1.0"/>
+    <test logic="AND" value="0.0">
+     anchoring/cable-connected GT 0.0
+    </test>
+   </switch>
+
+   <pid name="anchoring/cable-length-change-ft">
+    <!-- NOTE: The plain integrator component does not reset. -->
+    <input> anchoring/winch-speed-fps </input>
+    <kp>    0.00 </kp>
+    <ki>    1.00 </ki>
+    <kd>    0.00 </kd>
+    <trigger> anchoring/winch-reset </trigger>
+    <clipto>
+     <min>-anchoring/initial-cable-length-ft </min>
+     <max> 0.0 </max> <!-- Might not be wise. -->
+    </clipto>
+   </pid>
+
+   <fcs_function name="anchoring/cable-length-ft">
+    <function>
+     <sum>
+      <property> anchoring/initial-cable-length-ft </property>
+      <property> anchoring/cable-length-change-ft </property>
+     </sum>
+    </function>
+    <clipto>
+     <min> 0.0 </min>
+     <max> anchoring/initial-cable-length-ft </max> <!-- Might not be wise. -->
+    </clipto>
+   </fcs_function>
+
+   <fcs_function name="anchoring/cable-force-lbs">
+    <function>
+     <product>
+      <property> anchoring/cable-connected </property>
+      <property> anchoring/cable-spring-coeff-lbs_ft </property>
+      <max>
+       <difference>
+        <property> anchoring/total-distance-ft </property>
+        <property> anchoring/cable-length-ft </property>
+       </difference>
+       <value> 0.0 </value>
+      </max>
+     </product>
+    </function>
+    <clipto>
+     <min> 0.0 </min>
+     <max> anchoring/max-cable-force-lbs </max>
+    </clipto>
+   </fcs_function>
+
+   <fcs_function name="anchoring/total-force-lbs">
+    <function>
+     <sum>
+      <property> anchoring/cable-force-lbs </property>
+      <property> anchoring/anchoring-force-lbs </property>
+     </sum>
+    </function>
+   </fcs_function>
+
+   <fcs_function name="anchoring/force-north-lbs">
+    <function>
+     <product>
+      <property> anchoring/cable-connected </property>
+      <sum>
+       <product>
+        <property> anchoring/total-force-lbs </property>
+        <quotient>
+         <property> anchoring/latitude-diff-ft </property>
+         <property> anchoring/total-distance-ft </property>
+        </quotient>
+       </product>
+       <product>
+        <property> anchoring/anchored </property>
+        <property> anchoring/anchoring-damping-coeff-lbs_fps </property>
+        <property> velocities/vrp-v-north-fps </property>
+       </product>
+      </sum>
+     </product>
+    </function>
+    <output> external_reactions/anchoring-coupling-north/magnitude </output>
+   </fcs_function>
+
+   <fcs_function name="anchoring/force-east-lbs">
+    <function>
+     <product>
+      <property> anchoring/cable-connected </property>
+      <sum>
+       <product>
+        <property> anchoring/total-force-lbs </property>
+        <quotient>
+         <property> anchoring/longitude-diff-ft </property>
+         <property> anchoring/total-distance-ft </property>
+        </quotient>
+       </product>
+       <product>
+        <property> anchoring/anchored </property>
+        <property> anchoring/anchoring-damping-coeff-lbs_fps </property>
+        <property> velocities/vrp-v-east-fps </property>
+       </product>
+      </sum>
+     </product>
+    </function>
+    <output> external_reactions/anchoring-coupling-east/magnitude </output>
+   </fcs_function>
+
+ </channel>
+
+</system>
